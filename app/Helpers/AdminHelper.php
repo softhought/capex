@@ -17,34 +17,26 @@ function getTopNavCat($roleId, $baseUrl = "")
     return generateMenuHtml($menus, 0, $baseUrl);
 }
 
- function getRequisitionData($id)
-    { 
-        $requisitionData = Requisition::where('id', $id)->first();
-        if ($requisitionData) {
-            return $requisitionData;
-        } else {
-            return 0;
-        }
-    }
+//  function getRequisitionData($id)
+//     { 
+//         $requisitionData = Requisition::where('id', $id)->first();
+//         if ($requisitionData) {
+//             return $requisitionData;
+//         } else {
+//             return 0;
+//         }
+//     }
 
 
-function generateMenuHtml($menus, $level, $baseUrl)
+function generateMenuHtmlO($menus, $level, $baseUrl)
 {
-
     $html = '';
-
-   
-
     if ($level == 1) {
         $html .= '<ul class="menu-sub">';
     }
-
     foreach ($menus as $item) {
-
         $isOpen = request()->is($baseUrl . $item['url']) || isActiveChildMenu($item['children'], $baseUrl) ? 'open' : '';
         $isActive = request()->is($baseUrl . $item['url']) || isActiveChildMenu($item['children'], $baseUrl) ? 'active' : '';
-
-        // pre(count($item['children']));
         if (count($item['children']) > 0) {
             $url = url($baseUrl . $item['url']);
             $html .= '<li class="menu-item ' . $isOpen . '"><a class="menu-link menu-toggle" href="javascript:void(0);"> ' . $item['icon'] . ' ' . $item['name'] . '
@@ -54,16 +46,48 @@ function generateMenuHtml($menus, $level, $baseUrl)
             $url = url($baseUrl . $item['url']);
             $html .= '<li class="menu-item ' . $isActive . '"><a class="menu-link" href="' . $url . '"> ' . $item['icon'] . '' . $item['name'] . '</a>';
         }
-
         $html .= '</li>';
-        // pre($html);exit;
     }
     if ($level == 1) {
         $html .= '</ul>';
     }
+    return $html;
+}
+
+function generateMenuHtml($menus, $level, $baseUrl)
+{
+    $html = '';
+    foreach ($menus as $item) {
+        $isOpen = request()->is($baseUrl . $item['url']) || isActiveChildMenu($item['children'], $baseUrl) ? 'side-menu--active ' : '';
+        $isActive = request()->is($baseUrl . $item['url']) ? 'side-menu--active' : '';
+        $ulActive = request()->is($baseUrl . $item['url']) || isActiveChildMenu($item['children'], $baseUrl) ? 'side-menu__sub-open ' : '';;
+
+        if (count($item['children']) > 0) {
+            $html .= '<li>';
+            $html .= '<a class="side-menu ' . $isOpen . '" href="javascript:void(0);">';
+            $html .= '<div class="side-menu__icon">' . $item['icon'] . '</div>';
+            $html .= '<div class="side-menu__title">' . $item['name'];
+            $html .= '<div class="side-menu__sub-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></div>';
+            $html .= '</div></a>';
+            $html .= '<ul class="'.$ulActive.'">';
+            $html .= generateMenuHtml($item['children'], $level + 1, $baseUrl);
+            $html .= '</ul></li>';
+        } else {
+            $url = url($baseUrl . $item['url']);
+            $html .= '<li>';
+            $html .= '<a class="side-menu ' . $isActive . '" href="' . $url . '">';
+            $html .= '<div class="side-menu__icon">' . $item['icon'] . '</div>';
+            $html .= '<div class="side-menu__title">' . $item['name'] . '</div>';
+            $html .= '</a></li>';
+        }
+    }
 
     return $html;
 }
+
+
+
+
 
 function isActiveChildMenu($children, $baseUrl)
 {
@@ -115,33 +139,33 @@ if (!function_exists('getIpAddress')) {
 }
 
 
-function getMenuTree($userId)
-{
-    $menus = Menu::parents($userId)->with('childrenRecursive')->get();
-    // pre($menus->toarray());exit;
-    return generateMenuTree($menus, 0);
-}
+// function getMenuTree($userId)
+// {
+//     $menus = Menu::parents($userId)->with('childrenRecursive')->get();
+//     // pre($menus->toarray());exit;
+//     return generateMenuTree($menus, 0);
+// }
 
-function generateMenuTree($menus, $level)
-{
+// function generateMenuTree($menus, $level)
+// {
 
-    $html = '';
-    if ($level == 1) {
-        $html .= '<ul>';
-    }
-    // pre($menus->toArray());
-    foreach ($menus as $item) {
-        $html .= '<li id="' . $item['id'] . '">' . $item['name'];
-        $html .= generateMenuTree($item['children'], 1);
-        $html .= '</li>';
-        // pre($html);exit;
-    }
-    if ($level == 1) {
-        $html .= '</ul>';
-    }
+//     $html = '';
+//     if ($level == 1) {
+//         $html .= '<ul>';
+//     }
+//     // pre($menus->toArray());
+//     foreach ($menus as $item) {
+//         $html .= '<li id="' . $item['id'] . '">' . $item['name'];
+//         $html .= generateMenuTree($item['children'], 1);
+//         $html .= '</li>';
+//         // pre($html);exit;
+//     }
+//     if ($level == 1) {
+//         $html .= '</ul>';
+//     }
 
-    return $html;
-}
+//     return $html;
+// }
 
 function getEditData($mode, $arrayData, $filled, $imagePath = "")
 {

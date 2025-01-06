@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        if ($request->session()->has('pptcAdmin.userId')) {
+        if ($request->session()->has('capexAdmin.userId')) {
             return redirect('admin/dashboard');
         } else {
             $operand1 = rand(1, 10);
@@ -36,12 +36,12 @@ class UserController extends Controller
             [
                 'username' => 'required',
                 'password' => 'required',
-                'captcha_input' => 'required|integer|in:' . session('captcha_result.captchaSum'),
+              //  'captcha_input' => 'required|integer|in:' . session('captcha_result.captchaSum'),
             ],
             [
-                'captcha_input.required' => 'The captcha filled is required',
-                'captcha_input.integer' => 'The captcha filled is invalid',
-                'captcha_input.in' => 'The captcha filled is invalid',
+                // 'captcha_input.required' => 'The captcha filled is required',
+                // 'captcha_input.integer' => 'The captcha filled is invalid',
+                // 'captcha_input.in' => 'The captcha filled is invalid',
             ]
         );
         if ($validator->fails()) {
@@ -98,9 +98,9 @@ class UserController extends Controller
 
     public function logout()
     {
-        $pptcAdmin = session()->get('pptcAdmin');
-        $userId = $pptcAdmin['userId'];
-        $user_activity_id = $pptcAdmin['userActivityId'];
+        $capexAdmin = session()->get('capexAdmin');
+        $userId = $capexAdmin['userId'];
+        $user_activity_id = $capexAdmin['userActivityId'];
 
         $user = User::find($userId);
         $user->is_online = "0";
@@ -112,14 +112,14 @@ class UserController extends Controller
         DB::table('user_account_activitys')->where(['id' => $user_activity_id])->update($arr);
         // CommonDataModel::insertLogData('user_account_activitys', $arr, $user_activity_id, config('constants.LOG_U'));
 
-        session()->forget('pptcAdmin');
+        session()->forget('capexAdmin');
         session()->flash('logout', 'Logout sucessfully');
         return redirect('admin');
     }
 
     private function setSessionData($result)
     {
-        session(['pptcAdmin' => $result]);
+        session(['capexAdmin' => $result]);
 
     }
 

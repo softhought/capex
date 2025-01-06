@@ -12,6 +12,58 @@ MySQL - 5.5.5-10.4.28-MariaDB : Database - capex
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*Table structure for table `asset_group` */
+
+CREATE TABLE `asset_group` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `asset_group` varchar(255) DEFAULT NULL,
+  `is_active` enum('Y','N') DEFAULT 'Y',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+/*Data for the table `asset_group` */
+
+insert  into `asset_group`(`id`,`asset_group`,`is_active`,`created_at`,`updated_at`) values (1,'IT','N',NULL,NULL),(2,'Non IT','Y',NULL,NULL);
+
+/*Table structure for table `asset_type` */
+
+CREATE TABLE `asset_type` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `asset_group_id` int(10) DEFAULT NULL,
+  `company_id` int(10) DEFAULT NULL,
+  `asset_type` varchar(255) DEFAULT NULL,
+  `sap_asset_class` varchar(255) DEFAULT NULL,
+  `block_key` varchar(255) DEFAULT NULL,
+  `is_procurement_indicator` enum('Y','N') DEFAULT 'N',
+  `is_active` enum('Y','N') DEFAULT 'Y',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_asset_group` (`asset_group_id`),
+  CONSTRAINT `fk_asset_group` FOREIGN KEY (`asset_group_id`) REFERENCES `asset_group` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+/*Data for the table `asset_type` */
+
+insert  into `asset_type`(`id`,`asset_group_id`,`company_id`,`asset_type`,`sap_asset_class`,`block_key`,`is_procurement_indicator`,`is_active`,`created_at`,`updated_at`) values (1,1,1,'SAP Licenses','8000','07','Y','Y',NULL,NULL);
+
+/*Table structure for table `company_master` */
+
+CREATE TABLE `company_master` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `company_name` varchar(255) DEFAULT NULL,
+  `is_active` enum('Y','N') DEFAULT 'Y',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+/*Data for the table `company_master` */
+
+insert  into `company_master`(`id`,`company_name`,`is_active`,`created_at`,`updated_at`) values (1,'GEPL','Y',NULL,NULL);
+
 /*Table structure for table `employees` */
 
 CREATE TABLE `employees` (
@@ -95,7 +147,7 @@ CREATE TABLE `menu_permissions` (
 
 /*Data for the table `menu_permissions` */
 
-insert  into `menu_permissions`(`permission_id`,`role_id`,`menu_id`,`add`,`edit`,`delete`,`print`,`created_at`,`updated_at`) values (1,1,1,0,0,0,0,'2024-07-11 09:46:55','2024-07-11 09:46:57'),(2,2,2,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(3,1,3,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(4,1,4,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(5,1,5,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(6,1,6,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(7,1,7,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(8,1,8,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(9,1,9,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(10,1,10,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(11,1,11,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(12,1,12,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(13,1,21,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(14,1,14,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(15,1,15,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(16,1,16,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(17,1,17,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(18,1,18,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(19,1,19,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07');
+insert  into `menu_permissions`(`permission_id`,`role_id`,`menu_id`,`add`,`edit`,`delete`,`print`,`created_at`,`updated_at`) values (1,1,1,0,0,0,0,'2024-07-11 09:46:55','2024-07-11 09:46:57'),(2,2,2,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(3,1,3,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(4,1,4,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(5,1,5,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(6,1,6,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(7,1,7,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(8,1,8,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(9,1,9,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(10,1,10,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(11,1,11,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(12,1,12,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(13,1,21,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(14,1,14,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(15,1,15,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(16,1,16,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(17,1,17,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(18,1,44,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07'),(19,1,45,0,0,0,0,'2024-07-11 09:48:05','2024-07-11 09:48:07');
 
 /*Table structure for table `menus` */
 
@@ -116,11 +168,11 @@ CREATE TABLE `menus` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `emp_type` enum('INITIATOR','MANAGER','APPROVER') DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `menus` */
 
-insert  into `menus`(`id`,`name`,`url`,`route`,`controller`,`method`,`is_parent`,`parent_id`,`menu_srl`,`is_active`,`icon`,`menu_for`,`created_at`,`updated_at`,`emp_type`) values (1,'Dashboard','dashboard','dashboard','DashboardController','index','Y',NULL,1,'Y','<i class=\"menu-icon tf-icons bx bx-home-smile\"></i>','Admin','2024-07-11 09:46:30','2024-07-11 09:46:32',NULL),(2,'Dashboard','emp-dashboard','emp-dashboard','DashboardController','index','Y',NULL,2,'Y','<i class=\"menu-icon tf-icons bx bx-home-smile\"></i>','Employee','2024-07-11 09:46:30','2024-07-11 09:46:32','INITIATOR'),(3,'Master',NULL,NULL,'MasterController',NULL,'Y',NULL,3,'Y','<i class=\"menu-icon tf-icons bx bx-cog\"></i>\n','Admin','2024-07-11 09:46:30','2024-07-11 09:46:30',NULL),(4,'Department','department','department','MasterController','department','N',3,1,'Y',NULL,'Admin','2024-09-19 11:34:06','2024-09-19 11:34:08',NULL),(5,'Plant','plant','plant','MasterController','plant','N',3,2,'Y',NULL,'Admin','2024-09-19 11:34:06','2024-09-19 11:34:08',NULL),(6,'Company','company','company','MasterController','company','N',3,3,'Y',NULL,'Admin','2024-09-19 11:34:06','2024-09-19 11:34:08',NULL),(7,'Material','material','material','MasterController','material','N',3,4,'Y',NULL,'Admin','2024-09-19 11:34:06','2024-09-19 11:34:08',NULL),(8,'Vendor','vendor','vendor','MasterController','vendor','N',3,5,'Y',NULL,'Admin','2024-09-20 16:08:44','2024-09-20 16:08:46',NULL),(9,'Grade','grade','grade','MasterController','grade','N',3,6,'Y',NULL,'Admin','2024-09-20 16:08:44','2024-09-20 16:08:46',NULL),(10,'Employee','employee','employee','MasterController','employee','N',3,7,'Y',NULL,'Admin','2024-09-20 16:08:44','2024-09-20 16:08:46',NULL),(11,'Department Approver','department_approver','department_approver','MasterController','department_approver','N',3,15,'N',NULL,'Admin','2024-09-20 16:08:44','2024-09-20 16:08:46',NULL),(12,'Approver','approver','approver','MasterController','approver','N',3,10,'Y',NULL,'Admin','2024-09-20 16:08:44','2024-09-20 16:08:46',NULL),(13,'Purchase Requisition','requisition','requisition','RequisitionController','requisition','Y',NULL,9,'Y','<i class=\"menu-icon tf-icons bx bx-cog\"></i>\n','Employee','2024-09-20 16:08:44','2024-09-20 16:08:46','INITIATOR'),(14,'PPTC','pptc','pptc','PptcController','pptc','Y',NULL,10,'N','<i class=\"menu-icon tf-icons bx bx-cog\"></i>\n','Admin','2024-09-20 16:08:44','2024-09-20 16:08:46',NULL),(15,'First Reviewer','manager','manager','MasterController','manager','N',3,9,'N',NULL,'Admin','2024-09-20 16:08:44','2024-09-20 16:08:46',NULL),(16,'Vendor Selection','vendorselection','vendorselection','PptcController','vendorselection','Y',NULL,11,'N','<i class=\"menu-icon tf-icons bx bx-cog\"></i>\n','Admin','2024-09-20 16:08:44','2024-09-20 16:08:46',NULL),(17,'Initiator','initiator','initiator','MasterController','initiator','N',3,9,'Y',NULL,'Admin','2024-09-20 16:08:44','2024-09-20 16:08:46',NULL),(18,'Comparison Matrix','comparison_matrix','comparison_matrix','MasterController','comparison_matrix','N',3,8,'Y',NULL,'Admin','2024-09-20 16:08:44','2024-09-20 16:08:46',NULL),(19,'Approval Matrix','approvalmatrix','approvalmatrix','MasterController','approvalMatrix','N',3,11,'Y',NULL,'Admin','2024-09-20 16:08:44','2024-09-20 16:08:46',NULL),(21,'Purchase Requisition','requisition','requisition','ReportController','requisition','Y',NULL,9,'Y','<i class=\"menu-icon tf-icons bx bx-cog\"></i>\n','Admin','2024-09-20 16:08:44','2024-09-20 16:08:46','INITIATOR'),(22,'PPTC','pptc','pptc','PptcController','pptc','Y',NULL,10,'Y','<i class=\"menu-icon tf-icons bx bx-cog\"></i>\n','Employee','2024-09-20 16:08:44','2024-09-20 16:08:46','INITIATOR'),(23,'Vendor Selection','vendorselection','vendorselection','PptcController','vendorselection','Y',NULL,11,'Y','<i class=\"menu-icon tf-icons bx bx-cog\"></i>\n','Employee','2024-09-20 16:08:44','2024-09-20 16:08:46','INITIATOR'),(24,'Pending Approvals','pptcapproval','pptcapproval','ApprovalController','pptcapproval','Y',NULL,11,'Y','<i class=\"menu-icon tf-icons bx bx-cog\"></i>\n','Employee','2024-09-20 16:08:44','2024-09-20 16:08:46','APPROVER'),(25,'Pending Approvals','pptcapproval','pptcapproval','ApprovalController','pptcapproval','Y',NULL,11,'Y','<i class=\"menu-icon tf-icons bx bx-cog\"></i>\n','Employee','2024-09-20 16:08:44','2024-09-20 16:08:46','MANAGER'),(26,'Dashboard','emp-dashboard','emp-dashboard','DashboardController','index','Y',NULL,2,'Y','<i class=\"menu-icon tf-icons bx bx-home-smile\"></i>','Employee','2024-07-11 09:46:30','2024-07-11 09:46:32','MANAGER'),(27,'Dashboard','emp-dashboard','emp-dashboard','DashboardController','index','Y',NULL,2,'Y','<i class=\"menu-icon tf-icons bx bx-home-smile\"></i>','Employee','2024-07-11 09:46:30','2024-07-11 09:46:32','APPROVER');
+insert  into `menus`(`id`,`name`,`url`,`route`,`controller`,`method`,`is_parent`,`parent_id`,`menu_srl`,`is_active`,`icon`,`menu_for`,`created_at`,`updated_at`,`emp_type`) values (1,'Dashboard','dashboard','dashboard','DashboardController','index','Y',NULL,1,'Y','<i class=\"fa-solid fa-house\"></i>','Admin','2024-07-11 09:46:30','2024-07-11 09:46:32',NULL),(2,'Dashboard','emp-dashboard','emp-dashboard','DashboardController','index','Y',NULL,2,'Y','<i class=\"fa-solid fa-gears\"></i>','Employee','2024-07-11 09:46:30','2024-07-11 09:46:32','INITIATOR'),(3,'Master',NULL,NULL,'MasterController',NULL,'Y',NULL,3,'Y','<i class=\"fa-solid fa-gears\"></i>','Admin','2024-07-11 09:46:30','2024-07-11 09:46:30',NULL),(4,'Test','test','test','MasterController','test','N',3,1,'Y','<i class=\"fa-solid fa-diamond\"></i>','Admin','2024-09-19 11:34:06','2024-09-19 11:34:08',NULL),(5,'Assets Group','assetsgroup','assetsgroup','MasterController','assetsgroup','N',3,1,'Y','<i class=\"fa-solid fa-diamond\"></i>','Admin','2024-09-19 11:34:06','2024-09-19 11:34:08',NULL),(6,'Assets Type','assetstype','assetstype','MasterController','assetstype','N',3,1,'Y','<i class=\"fa-solid fa-diamond\"></i>','Admin','2024-09-19 11:34:06','2024-09-19 11:34:08',NULL);
 
 /*Table structure for table `migrations` */
 
@@ -226,9 +278,11 @@ CREATE TABLE `user_account_activitys` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_account_activitys_user_id_foreign` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `user_account_activitys` */
+
+insert  into `user_account_activitys`(`id`,`user_id`,`ip_address`,`user_browser`,`user_platform`,`login_time`,`logout_time`,`created_at`,`updated_at`) values (1,1,'127.0.0.1','Firefox','Windows','2025-01-02 07:48:24','2025-01-02 07:57:20',NULL,NULL),(2,1,'127.0.0.1','Firefox','Windows','2025-01-02 07:57:30',NULL,NULL,NULL),(3,1,'127.0.0.1','Firefox','Windows','2025-01-06 10:04:30','2025-01-06 12:30:51',NULL,NULL),(4,1,'127.0.0.1','Firefox','Windows','2025-01-06 12:30:57',NULL,NULL,NULL);
 
 /*Table structure for table `users` */
 
@@ -256,7 +310,7 @@ CREATE TABLE `users` (
 
 /*Data for the table `users` */
 
-insert  into `users`(`id`,`name`,`username`,`mobile_no`,`email`,`email_verified_at`,`password`,`profile_image`,`address`,`role_id`,`is_active`,`is_online`,`remember_token`,`created_at`,`updated_at`) values (1,'Admin','admin','8910088950','anilk89100@gmail.com','2024-07-11 15:13:00','$2y$12$NlBBsPRcAlJM.HojJWz6COJwDy1VfADHz7rno/O3j9azN7m9UajdW',NULL,NULL,1,'1','0',NULL,'2024-07-11 15:13:11','2024-12-31 07:18:38'),(3,'Admin','dev','8910088950','anilk89105@gmail.com','2024-07-11 15:13:00','$2y$10$W5hmQ3cWloGx0DSlQqOlv.pj1HK9oevwPwLeElLWXzBB7OfNcdZB2',NULL,NULL,1,'1','1',NULL,'2024-07-11 15:13:11','2024-09-19 14:11:35');
+insert  into `users`(`id`,`name`,`username`,`mobile_no`,`email`,`email_verified_at`,`password`,`profile_image`,`address`,`role_id`,`is_active`,`is_online`,`remember_token`,`created_at`,`updated_at`) values (1,'Admin','admin','8910088950','anilk89100@gmail.com','2024-07-11 15:13:00','$2y$12$NlBBsPRcAlJM.HojJWz6COJwDy1VfADHz7rno/O3j9azN7m9UajdW',NULL,NULL,1,'1','1',NULL,'2024-07-11 15:13:11','2025-01-06 12:30:57'),(3,'Admin','dev','8910088950','anilk89105@gmail.com','2024-07-11 15:13:00','$2y$10$W5hmQ3cWloGx0DSlQqOlv.pj1HK9oevwPwLeElLWXzBB7OfNcdZB2',NULL,NULL,1,'1','1',NULL,'2024-07-11 15:13:11','2024-09-19 14:11:35');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

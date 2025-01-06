@@ -26,13 +26,13 @@ class Menu extends Model
 
         if($roleId==1){
             return $this->hasMany(Menu::class, 'parent_id')
-            ->leftJoin('menu_permissions', function($join) use ($roleId) {
-                $join->on('menu_permissions.menu_id', '=', 'menus.id')
-                    ->where('menu_permissions.role_id', '=', $roleId);
+            // ->leftJoin('menu_permissions', function($join) use ($roleId) {
+            //     $join->on('menu_permissions.menu_id', '=', 'menus.id')
+            //         ->where('menu_permissions.role_id', '=', $roleId);
     
-            })
+            // })
             ->where('menus.is_active',"Y")
-            ->where('menu_permissions.permission_id', '>', 0)    // added this condition for menu_permissions
+          //  ->where('menu_permissions.permission_id', '>', 0)    // added this condition for menu_permissions
             ->select(DB::raw('DISTINCT menus.*'))
             ->orderBy('menus.menu_srl');
         }else{
@@ -58,14 +58,17 @@ class Menu extends Model
     public function scopeParents($query,$roleId)
     {
         Menu::$myGlobalVar = $roleId;
+        
 
         if($roleId==1){
-            return $query->leftJoin('menu_permissions', function($join) use ($roleId) {
-                $join->on('menus.id', '=', 'menu_permissions.menu_id')
-                     ->where('menu_permissions.role_id', '=', $roleId);
-            })
+            return $query
+            // ->leftJoin('menu_permissions', function($join) use ($roleId) {
+            //     $join->on('menus.id', '=', 'menu_permissions.menu_id')
+            //          ->where('menu_permissions.role_id', '=', $roleId);
+            // })
             ->whereNull('menus.parent_id')
-            ->where('menu_permissions.permission_id','>',0)
+            ->where('menus.menu_for', '=', 'Admin') 
+            //->where('menu_permissions.permission_id','>',0)
             ->where('menus.is_active','Y')
             // ->select(DB::raw('DISTINCT menus.*'))
             ->orderBy('menus.menu_srl');

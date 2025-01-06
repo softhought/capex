@@ -18,6 +18,14 @@
         <link rel="stylesheet" href="{{ asset('assets') }}/dist/css/app.css">
     </head>
     <!-- END: Head -->
+
+    <style>
+        @media (min-width: 1280px) {
+            .xl\:min-w-\[350px\] {
+                min-width: 422px;
+            }
+            }
+    </style>
     <body>
         <div>
             <div data-tw-backdrop="" aria-hidden="true" tabindex="-1" id="theme-switcher" class="modal group bg-black/60 transition-[visibility,opacity] w-screen h-screen fixed left-0 top-0 [&:not(.show)]:duration-[0s,0.2s] [&:not(.show)]:delay-[0.2s,0s] [&:not(.show)]:invisible [&:not(.show)]:opacity-0 [&.show]:visible [&.show]:opacity-100 [&.show]:duration-[0s,0.4s]">
@@ -197,33 +205,37 @@
                     </div>
                 </div>
             </div>
-            <div class="fixed bottom-0 right-0 z-50 flex items-center justify-center mb-5 mr-5 text-white rounded-full shadow-lg cursor-pointer h-14 w-14 bg-theme-1" data-tw-toggle="modal" data-tw-target="#theme-switcher">
+            {{-- <div class="fixed bottom-0 right-0 z-50 flex items-center justify-center mb-5 mr-5 text-white rounded-full shadow-lg cursor-pointer h-14 w-14 bg-theme-1" data-tw-toggle="modal" data-tw-target="#theme-switcher">
                 <i data-tw-merge="" data-lucide="settings" class="stroke-1.5 w-5 h-5 animate-spin"></i>
-            </div>
+            </div> --}}
         </div>
+        <form name="loginFormX" id="loginFormX">
+            @csrf
         <div class="p-3 sm:px-8 relative h-screen lg:overflow-hidden bg-primary xl:bg-white dark:bg-darkmode-800 xl:dark:bg-darkmode-600 before:hidden before:xl:block before:content-[''] before:w-[57%] before:-mt-[28%] before:-mb-[16%] before:-ml-[13%] before:absolute before:inset-y-0 before:left-0 before:transform before:rotate-[-4.5deg] before:bg-primary/20 before:rounded-[100%] before:dark:bg-darkmode-400 after:hidden after:xl:block after:content-[''] after:w-[57%] after:-mt-[20%] after:-mb-[13%] after:-ml-[13%] after:absolute after:inset-y-0 after:left-0 after:transform after:rotate-[-4.5deg] after:bg-primary after:rounded-[100%] after:dark:bg-darkmode-700">
             <div class="container relative z-10 sm:px-10">
                 <div class="block grid-cols-2 gap-4 xl:grid">
                     <!-- BEGIN: Login Info -->
                     <div class="hidden min-h-screen flex-col xl:flex">
-                        <a class="-intro-x flex items-center pt-5" href="#">
+                        {{-- <a class="-intro-x flex items-center pt-5" href="#">
                             <img class="w-6" src="{{ asset('assets') }}/dist/images/logo.svg" alt="Midone - Tailwind Admin Dashboard Template">
                             <span class="ml-3 text-lg text-white"> Midone </span>
-                        </a>
+                        </a> --}}
                         <div class="my-auto">
                             <img class="-intro-x -mt-16 w-1/2" src="{{ asset('assets') }}/dist/images/illustration.svg" alt="Midone - Tailwind Admin Dashboard Template">
                             <div class="-intro-x mt-10 text-4xl font-medium leading-tight text-white">
-                                A few more clicks to <br>
-                                sign in to your account.
+                                CAPEX <br>
+                               
                             </div>
                             <div class="-intro-x mt-5 text-lg text-white text-opacity-70 dark:text-slate-400">
-                                Manage all your e-commerce accounts in one place
+                                Web-based system designed to automate and <br>streamline the capital expenditure request process
                             </div>
                         </div>
                     </div>
                     <!-- END: Login Info -->
                     <!-- BEGIN: Login Form -->
-                    <div class="my-10 flex h-screen py-5 xl:my-0 xl:h-auto xl:py-0">
+
+                    
+                    <div class="my-10 flex h-screen py-5 xl:my-0 xl:h-auto xl:py-0">                        
                         <div class="mx-auto my-auto w-full rounded-md bg-white px-5 py-8 shadow-md dark:bg-darkmode-600 sm:w-3/4 sm:px-8 lg:w-2/4 xl:ml-20 xl:w-auto xl:bg-transparent xl:p-0 xl:shadow-none">
                             <h2 class="intro-x text-center text-2xl font-bold xl:text-left xl:text-3xl">
                                 Sign In
@@ -236,7 +248,7 @@
                                 <input data-tw-merge="" type="text" placeholder="Email" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 intro-x block min-w-full px-4 py-3 xl:min-w-[350px]">
                                 <input data-tw-merge="" type="password" placeholder="Password" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 intro-x mt-4 block min-w-full px-4 py-3 xl:min-w-[350px]">
                             </div>
-                            <div class="intro-x mt-4 flex text-xs text-slate-600 dark:text-slate-500 sm:text-sm">
+                            {{-- <div class="intro-x mt-4 flex text-xs text-slate-600 dark:text-slate-500 sm:text-sm">
                                 <div class="mr-auto flex items-center">
                                     <input data-tw-merge="" type="checkbox" class="transition-all duration-100 ease-in-out shadow-sm border-slate-200 cursor-pointer rounded focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&[type='radio']]:checked:bg-primary [&[type='radio']]:checked:border-primary [&[type='radio']]:checked:border-opacity-10 [&[type='checkbox']]:checked:bg-primary [&[type='checkbox']]:checked:border-primary [&[type='checkbox']]:checked:border-opacity-10 [&:disabled:not(:checked)]:bg-slate-100 [&:disabled:not(:checked)]:cursor-not-allowed [&:disabled:not(:checked)]:dark:bg-darkmode-800/50 [&:disabled:checked]:opacity-70 [&:disabled:checked]:cursor-not-allowed [&:disabled:checked]:dark:bg-darkmode-800/50 mr-2 border" id="remember-me">
                                     <label class="cursor-pointer select-none" for="remember-me">
@@ -244,12 +256,12 @@
                                     </label>
                                 </div>
                                 <a href="#">Forgot Password?</a>
-                            </div>
+                            </div> --}}
                             <div class="intro-x mt-5 text-center xl:mt-8 xl:text-left">
-                                <button data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary w-full px-4 py-3 align-top xl:mr-3 xl:w-32">Login</button>
-                                <button data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed border-secondary text-slate-500 dark:border-darkmode-100/40 dark:text-slate-300 [&:hover:not(:disabled)]:bg-secondary/20 [&:hover:not(:disabled)]:dark:bg-darkmode-100/10 mt-3 w-full px-4 py-3 align-top xl:mt-0 xl:w-32">Register</button>
+                                <button data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary w-full px-4 py-3 align-top xl:mr-3 xl:w-32 float-end">Login</button>
+                                {{-- <button data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed border-secondary text-slate-500 dark:border-darkmode-100/40 dark:text-slate-300 [&:hover:not(:disabled)]:bg-secondary/20 [&:hover:not(:disabled)]:dark:bg-darkmode-100/10 mt-3 w-full px-4 py-3 align-top xl:mt-0 xl:w-32">Register</button> --}}
                             </div>
-                            <div class="intro-x mt-10 text-center text-slate-600 dark:text-slate-500 xl:mt-24 xl:text-left">
+                            {{-- <div class="intro-x mt-10 text-center text-slate-600 dark:text-slate-500 xl:mt-24 xl:text-left">
                                 By signin up, you agree to our
                                 <a class="text-primary dark:text-slate-200" href="#">
                                     Terms and Conditions
@@ -258,13 +270,18 @@
                                 <a class="text-primary dark:text-slate-200" href="#">
                                     Privacy Policy
                                 </a>
-                            </div>
-                        </div>
+                            </div> --}}
+                        </div>                  
                     </div>
+                    
+
+
+
                     <!-- END: Login Form -->
                 </div>
             </div>
         </div>
+    </form>
         <!-- BEGIN: Vendor JS Assets-->
         <script src="{{ asset('assets') }}/dist/js/vendors/dom.js"></script>
         <script src="{{ asset('assets') }}/dist/js/vendors/tailwind-merge.js"></script>
@@ -272,6 +289,8 @@
         <script src="{{ asset('assets') }}/dist/js/vendors/modal.js"></script>
         <script src="{{ asset('assets') }}/dist/js/components/base/theme-color.js"></script>
         <script src="{{ asset('assets') }}/dist/js/components/base/lucide.js"></script> <!-- END: Vendor JS Assets-->
+        <script src="{{ asset('assets') }}/js/jquery-3.6.0.min.js"></script>
+        <script src="{{ asset('assets') }}/js/employee/employee_login.js"></script>
         <!-- BEGIN: Pages, layouts, components JS Assets-->
         <!-- END: Pages, layouts, components JS Assets-->
     </body>

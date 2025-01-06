@@ -1,145 +1,317 @@
-<!DOCTYPE html>
-<html lang="zxx">
+<!DOCTYPE html><!--
+   
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" class="opacity-0" lang="en"><!-- BEGIN: Head -->
 
+<!-- Mirrored from midone-html.vercel.app/rubick-side-menu-login-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 30 Dec 2024 13:50:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
-    <title>PPTC | Admin Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <!-- External CSS libraries -->
-    <link type="text/css" rel="stylesheet" href="{{ asset('assets') }}/login-assets/css/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet"
-        href="{{ asset('assets') }}/login-assets/fonts/font-awesome/css/font-awesome.min.css">
-    <link type="text/css" rel="stylesheet" href="{{ asset('assets') }}/login-assets/fonts/flaticon/font/flaticon.css">
-
-    <!-- Favicon icon -->
-    <link rel="shortcut icon" href="{{ asset('assets') }}/img/favicon.png" type="image/x-icon">
-
-    <!-- Google fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800;900&amp;display=swap"
-        rel="stylesheet">
-
-    <!-- Custom Stylesheet -->
-    <link type="text/css" rel="stylesheet" href="{{ asset('assets') }}/login-assets/css/style.css">
-
+    <meta charset="utf-8">
+    <meta name="csrf-token" content="Koo2zWJKliRELq4FawEfkQPg3CJYusp6ppGFZw4O">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Midone admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, midone Admin Template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="LEFT4CODE">
+    <title>Admin Login - CAPEX</title>
+    <!-- BEGIN: CSS Assets-->
+    <!-- END: CSS Assets-->
+    <link rel="stylesheet" href="{{ asset('assets') }}/dist/css/app.css">
 </head>
+<!-- END: Head -->
 
-<body id="top">
-    <div class="page_loader"></div>
-    <input type="hidden" name="base_url" id="base_url" value="{{ url('/') }}">
-    <div class="login-8" style="background-color: #ebebeb;">
-        <div class="container">
-            <div class="row login-box">
-              
-                <div class="col-lg-7 col-md-12 form-info">
-                    <img src="{{ asset('assets') }}/img/accleron.png" alt="logo" style="width: 35%; margin-top: -70px;margin-left: -61px;">
-                    <div class="form-section">
-                        
-                        <div class="logo clearfix">
-                            {{-- <a href="{{ url('/') }}">
-                              
-                             </a> --}}
-                            <a href="{{ url('/') }}">
-                               <img src="{{ asset('assets') }}/img/app-logo.png" alt="logo">
-                            </a>
-                        </div>
-                        <h3 class="mb-3" style="color:#4e8bc9;">Admin Sign In</h3>
-                        <div class="invalid-feedback d-block text-center mb-4" id="errormsg" style="font-weight: 600;letter-spacing: 0.4px;"></div>
-                        <div class="login-inner-form">
+<style>
+    @media (min-width: 1280px) {
+        .xl\:min-w-\[350px\] {
+            min-width: 422px;
+        }
+        }
 
-                            <form name="loginForm" id="loginForm" >
-                                @csrf
-                                <div class="form-group form-box">
-                                    <input type="text" name="username" id="username" class="form-control"
-                                        placeholder="Username" aria-label="Username" >
-                                    <i class="flaticon-user"></i>
-                                    <div class="invalid-feedback d-block text-start px-2" id="username_error">
-
-                                    </div>
-                                </div>
-                                <div class="form-group form-box">
-                                    <input type="password" name="password" id="password" class="form-control"
-                                        autocomplete="off" placeholder="Password" aria-label="Password">
-                                    <i class="flaticon-password"></i>
-                                    <div class="invalid-feedback d-block text-start px-2" id="password_error">
-                                    </div>
-                                </div>
-
-
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <div class="input-group ">
-                                            <input class="captcha-container float-center form-control p-0 text-center" id="captcha" value="{!! $operand1 . ' + '
-                                                . $operand2 !!}" readonly>
+        .invalid-feedback{
+            color: red;
+        }
+</style>
+<body>
+    <div>
+        <div data-tw-backdrop="" aria-hidden="true" tabindex="-1" id="theme-switcher" class="modal group bg-black/60 transition-[visibility,opacity] w-screen h-screen fixed left-0 top-0 [&:not(.show)]:duration-[0s,0.2s] [&:not(.show)]:delay-[0.2s,0s] [&:not(.show)]:invisible [&:not(.show)]:opacity-0 [&.show]:visible [&.show]:opacity-100 [&.show]:duration-[0s,0.4s]">
+            <div data-tw-merge="" class="w-[90%] ml-auto h-screen flex flex-col bg-white relative shadow-md transition-[margin-right] duration-[0.6s] -mr-[100%] group-[.show]:mr-0 dark:bg-darkmode-600 sm:w-[460px]"><a class="absolute inset-y-0 left-0 right-auto my-auto -ml-[60px] flex h-8 w-8 items-center justify-center rounded-full border border-white/90 bg-white/5 text-white/90 transition-all hover:rotate-180 hover:scale-105 hover:bg-white/10 focus:outline-none sm:-ml-[105px] sm:h-14 sm:w-14" data-tw-dismiss="modal" href="javascript:;">
+                    <i data-tw-merge="" data-lucide="x" class="h-3 w-3 stroke-[1] sm:h-8 sm:w-8"></i>
+                </a>
+                <div data-tw-merge="" class="overflow-y-auto flex-1 p-0">
+                    <div class="flex flex-col">
+                        <div class="px-8 pt-6 pb-8">
+                            <div class="text-base font-medium">Themes</div>
+                            <div class="mt-0.5 text-slate-500">Choose your theme</div>
+                            <div class="mt-5 grid grid-cols-2 gap-x-5 gap-y-3.5">
+                                <div>
+                                    <a href="rubick-side-menu-dashboard-overview-1-page.html" class="h-28 cursor-pointer bg-slate-50 box p-1 block border-2 border-theme-1/60">
+                                        <div class="w-full h-full overflow-hidden rounded-md image-fit">
+                                            <img class="w-full h-full" src="{{ asset('assets') }}/dist/images/themes/rubick.png" alt="Midone - Admin Dashboard Template">
                                         </div>
+                                    </a>
+                                    <div class="mt-2.5 text-center text-xs capitalize">
+                                        rubick
                                     </div>
-                                    <div class="col-md-2 ">
-
-                                        <button type="button" class="btn-floating" id="reload"><i class="fa fa-refresh"
-                                                aria-hidden="true"></i>
-                                        </button>
-
+                                </div>
+                                <div>
+                                    <a href="icewall-side-menu-dashboard-overview-1-page.html" class="h-28 cursor-pointer bg-slate-50 box p-1 block">
+                                        <div class="w-full h-full overflow-hidden rounded-md image-fit">
+                                            <img class="w-full h-full" src="{{ asset('assets') }}/dist/images/themes/icewall.png" alt="Midone - Admin Dashboard Template">
+                                        </div>
+                                    </a>
+                                    <div class="mt-2.5 text-center text-xs capitalize">
+                                        icewall
                                     </div>
-                                    <div class="col-md-5">
-                                    <div class="input-group ">
-                                        <input type="text" class="form-control float-right " placeholder="Enter captcha"
-                                            name="captcha_input" id="captcha_input" autocomplete="off">
+                                </div>
+                                <div>
+                                    <a href="tinker-side-menu-dashboard-overview-1-page.html" class="h-28 cursor-pointer bg-slate-50 box p-1 block">
+                                        <div class="w-full h-full overflow-hidden rounded-md image-fit">
+                                            <img class="w-full h-full" src="{{ asset('assets') }}/dist/images/themes/tinker.png" alt="Midone - Admin Dashboard Template">
                                         </div>
+                                    </a>
+                                    <div class="mt-2.5 text-center text-xs capitalize">
+                                        tinker
+                                    </div>
+                                </div>
+                                <div>
+                                    <a href="enigma-side-menu-dashboard-overview-1-page.html" class="h-28 cursor-pointer bg-slate-50 box p-1 block">
+                                        <div class="w-full h-full overflow-hidden rounded-md image-fit">
+                                            <img class="w-full h-full" src="{{ asset('assets') }}/dist/images/themes/enigma.png" alt="Midone - Admin Dashboard Template">
                                         </div>
-                                    <div class="invalid-feedback d-block text-start px-2 mb-5" id="captcha_input_error"></div>
+                                    </a>
+                                    <div class="mt-2.5 text-center text-xs capitalize">
+                                        enigma
+                                    </div>
                                 </div>
-
-                                <!-- <div class="checkbox form-group form-box">
-                                <div class="form-check checkbox-theme">
-                                    <input class="form-check-input" type="checkbox" value="" id="rememberMe">
-                                    <label class="form-check-label" for="rememberMe">Remember me</label>
-                                </div>
-                                <a href="forgot-password-8.html">Forgot Password</a>
-                            </div> -->
-                                <div class="form-group mb-0">
-                                    <button type="submit" class="btn-md btn-theme w-100" id="login_btn"
-                                        style="background-color: #1f2f60;">Login</button>
-                                    <button class="btn-md btn-theme w-100 d-none" type="button" id="loader_btn" style="background-color: #3b3838;">
-                                            <div class="spinner-border" role="status" >
-                                          </div>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5 col-md-12 bg-img">
-                    <div class="info">
-                        {{-- <div class="info-text">
-                            <div class="waviy">
-                                <span style="--i:1; color: #000;">W</span>
-                                <span style="--i:2; color: #000;">e</span>
-                                <span style="--i:3; color: #000;">l</span>
-                                <span style="--i:4; color: #000;">c</span>
-                                <span style="--i:5; color: #000;">o</span>
-                                <span style="--i:6; color: #000;">m</span>
-                                <span style="--i:7; color: #000;">e</span>
-                                <span style="--i:8">t</span>
-                                <span style="--i:9">o</span>
-                                <span style="--i:10; color: #000;">P</span>
-                                <span style="--i:11; color: #000;">p</span>
-                                <span style="--i:12; color: #000;">T</span>
-                                <span style="--i:13; color: #000;">C</span>
-                           
                             </div>
-                            <p style="color: #000; text-align: center; font-size: 15px;">Welcome to the Gainwell PPTC.</p>
-                        </div> --}}
+                        </div>
+                        <div class="border-b border-dashed"></div>
+                        <div class="px-8 pt-6 pb-8">
+                            <div class="text-base font-medium">Layouts</div>
+                            <div class="mt-0.5 text-slate-500">Choose your layout</div>
+                            <div class="mt-5 grid grid-cols-3 gap-x-5 gap-y-3.5">
+                                <div>
+                                    <a href="rubick-side-menu-dashboard-overview-1-page.html" class="h-24 cursor-pointer bg-slate-50 box p-1 block border-2 border-theme-1/60">
+                                        <div class="w-full h-full overflow-hidden rounded-md">
+                                            <img class="w-full h-full" src="{{ asset('assets') }}/dist/images/layouts/side-menu.png" alt="Midone - Admin Dashboard Template">
+                                        </div>
+                                    </a>
+                                    <div class="mt-2.5 text-center text-xs capitalize">
+                                        side menu
+                                    </div>
+                                </div>
+                                <div>
+                                    <a href="rubick-simple-menu-dashboard-overview-1-page.html" class="h-24 cursor-pointer bg-slate-50 box p-1 block">
+                                        <div class="w-full h-full overflow-hidden rounded-md">
+                                            <img class="w-full h-full" src="{{ asset('assets') }}/dist/images/layouts/simple-menu.png" alt="Midone - Admin Dashboard Template">
+                                        </div>
+                                    </a>
+                                    <div class="mt-2.5 text-center text-xs capitalize">
+                                        simple menu
+                                    </div>
+                                </div>
+                                <div>
+                                    <a href="rubick-top-menu-dashboard-overview-1-page.html" class="h-24 cursor-pointer bg-slate-50 box p-1 block">
+                                        <div class="w-full h-full overflow-hidden rounded-md">
+                                            <img class="w-full h-full" src="{{ asset('assets') }}/dist/images/layouts/top-menu.png" alt="Midone - Admin Dashboard Template">
+                                        </div>
+                                    </a>
+                                    <div class="mt-2.5 text-center text-xs capitalize">
+                                        top menu
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-b border-dashed"></div>
+                        <div class="px-8 pt-6 pb-8">
+                            <div class="text-base font-medium">Accent Colors</div>
+                            <div class="mt-0.5 text-slate-500">
+                                Choose your accent color
+                            </div>
+                            <div class="mt-5 grid grid-cols-2 gap-3.5">
+                                <div>
+                                    <a data-theme-color="default" class="h-14 cursor-pointer bg-slate-50 box p-1 border-slate-300/80 block [&.active]:border-2 [&.active]:border-theme-1/60">
+                                        <div class="h-full overflow-hidden rounded-md">
+                                            <div class="flex items-center h-full gap-1 -mx-2">
+                                                <div class="w-1/2 h-[200%] bg-theme-1 rotate-12 default"></div>
+                                                <div class="w-1/2 h-[200%] bg-theme-2 rotate-12 default"></div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a data-theme-color="theme-1" class="h-14 cursor-pointer bg-slate-50 box p-1 border-slate-300/80 block [&.active]:border-2 [&.active]:border-theme-1/60">
+                                        <div class="h-full overflow-hidden rounded-md">
+                                            <div class="flex items-center h-full gap-1 -mx-2">
+                                                <div class="w-1/2 h-[200%] bg-theme-1 rotate-12 theme-1"></div>
+                                                <div class="w-1/2 h-[200%] bg-theme-2 rotate-12 theme-1"></div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a data-theme-color="theme-2" class="h-14 cursor-pointer bg-slate-50 box p-1 border-slate-300/80 block [&.active]:border-2 [&.active]:border-theme-1/60">
+                                        <div class="h-full overflow-hidden rounded-md">
+                                            <div class="flex items-center h-full gap-1 -mx-2">
+                                                <div class="w-1/2 h-[200%] bg-theme-1 rotate-12 theme-2"></div>
+                                                <div class="w-1/2 h-[200%] bg-theme-2 rotate-12 theme-2"></div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a data-theme-color="theme-3" class="h-14 cursor-pointer bg-slate-50 box p-1 border-slate-300/80 block [&.active]:border-2 [&.active]:border-theme-1/60">
+                                        <div class="h-full overflow-hidden rounded-md">
+                                            <div class="flex items-center h-full gap-1 -mx-2">
+                                                <div class="w-1/2 h-[200%] bg-theme-1 rotate-12 theme-3"></div>
+                                                <div class="w-1/2 h-[200%] bg-theme-2 rotate-12 theme-3"></div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a data-theme-color="theme-4" class="h-14 cursor-pointer bg-slate-50 box p-1 border-slate-300/80 block [&.active]:border-2 [&.active]:border-theme-1/60">
+                                        <div class="h-full overflow-hidden rounded-md">
+                                            <div class="flex items-center h-full gap-1 -mx-2">
+                                                <div class="w-1/2 h-[200%] bg-theme-1 rotate-12 theme-4"></div>
+                                                <div class="w-1/2 h-[200%] bg-theme-2 rotate-12 theme-4"></div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-b border-dashed"></div>
+                        <div class="px-8 pt-6 pb-8">
+                            <div class="text-base font-medium">Appearance</div>
+                            <div class="mt-0.5 text-slate-500">
+                                Choose your appearance
+                            </div>
+                            <div class="mt-5 grid grid-cols-2 gap-3.5">
+                                <div>
+                                    <a data-appearance-mode="light" class="h-12 cursor-pointer bg-slate-50 box p-1 border-slate-300/80 block [&.active]:border-2 [&.active]:border-theme-1/60">
+                                        <div class="h-full overflow-hidden rounded-md bg-slate-200"></div>
+                                    </a>
+                                    <div class="mt-2.5 text-center text-xs capitalize">
+                                        Light
+                                    </div>
+                                </div>
+                                <div>
+                                    <a data-appearance-mode="dark" class="h-12 cursor-pointer bg-slate-50 box p-1 border-slate-300/80 block [&.active]:border-2 [&.active]:border-theme-1/60">
+                                        <div class="h-full overflow-hidden rounded-md bg-slate-900"></div>
+                                    </a>
+                                    <div class="mt-2.5 text-center text-xs capitalize">
+                                        Dark
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        {{-- <div class="fixed bottom-0 right-0 z-50 flex items-center justify-center mb-5 mr-5 text-white rounded-full shadow-lg cursor-pointer h-14 w-14 bg-theme-1" data-tw-toggle="modal" data-tw-target="#theme-switcher">
+            <i data-tw-merge="" data-lucide="settings" class="stroke-1.5 w-5 h-5 animate-spin"></i>
+        </div> --}}
     </div>
+    <form name="loginForm" id="loginForm">
+        @csrf
+        <input type="hidden" name="base_url" id="base_url" value="{{ url('/') }}">
+    <div class="p-3 sm:px-8 relative h-screen lg:overflow-hidden bg-primary xl:bg-white dark:bg-darkmode-800 xl:dark:bg-darkmode-600 before:hidden before:xl:block before:content-[''] before:w-[57%] before:-mt-[28%] before:-mb-[16%] before:-ml-[13%] before:absolute before:inset-y-0 before:left-0 before:transform before:rotate-[-4.5deg] before:bg-primary/20 before:rounded-[100%] before:dark:bg-darkmode-400 after:hidden after:xl:block after:content-[''] after:w-[57%] after:-mt-[20%] after:-mb-[13%] after:-ml-[13%] after:absolute after:inset-y-0 after:left-0 after:transform after:rotate-[-4.5deg] after:bg-primary after:rounded-[100%] after:dark:bg-darkmode-700">
+        <div class="container relative z-10 sm:px-10">
+            <div class="block grid-cols-2 gap-4 xl:grid">
+                <!-- BEGIN: Login Info -->
+                <div class="hidden min-h-screen flex-col xl:flex">
+                    {{-- <img src="{{ asset('assets') }}/images/app-logo.png" alt="logo"
+            style="width: 35%;"> --}}
+              {{-- <a class="-intro-x flex items-center pt-5" href="#">
+                        <img class="w-6" src="{{ asset('assets') }}/dist/images/logo.svg" alt="Midone - Tailwind Admin Dashboard Template">
+                        <span class="ml-3 text-lg text-white"> Midone </span>
+                    </a> --}}
+                    <a class="-intro-x flex items-center p-4" href="#">
+                        <img  src="{{ asset('assets') }}/images/app-logo.png" alt="GEPL" style="width: 35%;" >
+                        {{-- <span class="ml-3 text-lg text-white"> Midone </span> --}}
+                    </a>
+                    <div class="my-auto">
+                        <img class="-intro-x -mt-16 w-1/2" src="{{ asset('assets') }}/dist/images/illustration.svg" alt="Midone - Tailwind Admin Dashboard Template">
+                        <div class="-intro-x mt-10 text-4xl font-medium leading-tight text-white">
+                            CAPEX <br>
+                           
+                        </div>
+                        <div class="-intro-x mt-5 text-lg text-white text-opacity-70 dark:text-slate-400">
+                            Web-based system designed to automate and <br>streamline the capital expenditure request process
+                        </div>
+                    </div>
+                    gf
+                </div>
+                <!-- END: Login Info -->
+                <!-- BEGIN: Login Form -->
 
-    <script src="{{ asset('assets') }}/login-assets/js/jquery-3.6.0.min.js"></script>
-    <script src="{{ asset('assets') }}/login-assets/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('assets') }}/login-assets/js/jquery.validate.min.js"></script>
-    <script src="{{ asset('assets') }}/login-assets/js/login.js"></script>
+                
+                <div class="my-10 flex h-screen py-5 xl:my-0 xl:h-auto xl:py-0">                        
+                    <div class="mx-auto my-auto w-full rounded-md bg-white px-5 py-8 shadow-md dark:bg-darkmode-600 sm:w-3/4 sm:px-8 lg:w-2/4 xl:ml-20 xl:w-auto xl:bg-transparent xl:p-0 xl:shadow-none">
+                        
+                        <h2 class="intro-x text-center text-2xl font-bold xl:text-left xl:text-3xl">
+                            Admin Sign In
+                        </h2>
+                        <div class="intro-x mt-2 text-center text-slate-400 xl:hidden">
+                          
+                        </div>
+                        <div class="intro-x mt-8">
+                            <input name="username" id="username" data-tw-merge="" type="text" placeholder="Username" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 intro-x block min-w-full px-4 py-3 xl:min-w-[350px]">
+                            <div class="invalid-feedback d-block text-start px-2" id="username_error">
+                            </div>
+                            <input data-tw-merge="" type="password" name="password" id="password" placeholder="Password" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 intro-x mt-4 block min-w-full px-4 py-3 xl:min-w-[350px]">
+                            <div class="invalid-feedback d-block text-start px-2" id="password_error"> </div>
+                        </div>
+                        {{-- <div class="intro-x mt-4 flex text-xs text-slate-600 dark:text-slate-500 sm:text-sm">
+                            <div class="mr-auto flex items-center">
+                                <input data-tw-merge="" type="checkbox" class="transition-all duration-100 ease-in-out shadow-sm border-slate-200 cursor-pointer rounded focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&[type='radio']]:checked:bg-primary [&[type='radio']]:checked:border-primary [&[type='radio']]:checked:border-opacity-10 [&[type='checkbox']]:checked:bg-primary [&[type='checkbox']]:checked:border-primary [&[type='checkbox']]:checked:border-opacity-10 [&:disabled:not(:checked)]:bg-slate-100 [&:disabled:not(:checked)]:cursor-not-allowed [&:disabled:not(:checked)]:dark:bg-darkmode-800/50 [&:disabled:checked]:opacity-70 [&:disabled:checked]:cursor-not-allowed [&:disabled:checked]:dark:bg-darkmode-800/50 mr-2 border" id="remember-me">
+                                <label class="cursor-pointer select-none" for="remember-me">
+                                    Remember me
+                                </label>
+                            </div>
+                            <a href="#">Forgot Password?</a>
+                        </div> --}}
+                        <div class="intro-x mt-5 text-center xl:mt-8 xl:text-left">
+                            <button data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary w-full px-4 py-3 align-top xl:mr-3 xl:w-32 float-end">Login</button>
+                            {{-- <button data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed border-secondary text-slate-500 dark:border-darkmode-100/40 dark:text-slate-300 [&:hover:not(:disabled)]:bg-secondary/20 [&:hover:not(:disabled)]:dark:bg-darkmode-100/10 mt-3 w-full px-4 py-3 align-top xl:mt-0 xl:w-32">Register</button> --}}
+                        </div>
 
+                       
+                        {{-- <div class="intro-x mt-10 text-center text-slate-600 dark:text-slate-500 xl:mt-24 xl:text-left">
+                            By signin up, you agree to our
+                            <a class="text-primary dark:text-slate-200" href="#">
+                                Terms and Conditions
+                            </a>
+                            &
+                            <a class="text-primary dark:text-slate-200" href="#">
+                                Privacy Policy
+                            </a>
+                        </div> --}}
+                    </div> 
+                    
+                    
+                </div>
+                
 
+                <!-- END: Login Form -->
+            </div> 
+        </div>
+    </div>
+</form>
+
+    <!-- BEGIN: Vendor JS Assets-->
+    <script src="{{ asset('assets') }}/dist/js/vendors/dom.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/vendors/tailwind-merge.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/vendors/lucide.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/vendors/modal.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/components/base/theme-color.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/components/base/lucide.js"></script> <!-- END: Vendor JS Assets-->
+    <script src="{{ asset('assets') }}/js/jquery-3.7.1.min.js"></script>
+    <script src="{{ asset('assets') }}/js/admin/admin_login.js"></script>
+    <!-- BEGIN: Pages, layouts, components JS Assets-->
+    <!-- END: Pages, layouts, components JS Assets-->
 </body>
 
+<!-- Mirrored from midone-html.vercel.app/rubick-side-menu-login-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 30 Dec 2024 13:50:05 GMT -->
 </html>

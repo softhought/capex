@@ -43,6 +43,13 @@ Route::prefix('admin')->middleware(['admin_auth'])->group(function () {
     Route::get($list['route'], [$controller, $list['method']]);
   }
 
+   /** Asset Type Master */
+   Route::post('assettype/getdata', [MasterController::class, 'getdataassetstype']);
+   Route::post('assettype/status', [MasterController::class, 'assetsTypeStatus']);
+  Route::get('assettype/addedit/{id?}', [MasterController::class, 'assetsTypeAddEdit']);
+  Route::post('departmentaddeditajax', [MasterController::class, 'departmentAddEditAction']);
+  Route::post('departmentexcelajax', [MasterController::class, 'departmentExcel']);
+
   Route::post('log/{table}/{rowid}', [LayoutController::class, 'logActivity']);
 
   Route::get('logout', [UserController::class, 'logout'])->name('admin.logout');

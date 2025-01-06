@@ -11,7 +11,7 @@ class AdminAuth
     public function handle(Request $request, Closure $next)
     {
 
-        if($request->session()->has('pptcAdmin')){
+        if($request->session()->has('capexAdmin')){
 
         }else{
             session()->flash('error','Access Denied');

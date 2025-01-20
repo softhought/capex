@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-    alert()
+   
 
     $(document).on('keyup change', 'input, select', function() {
         var inputValue = $(this).val();

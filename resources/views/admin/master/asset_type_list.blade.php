@@ -19,7 +19,7 @@
     </div>
 
     <div class="intro-y col-span-12 overflow-auto lg:overflow-visible marginTopMinus40" id="assettype_data">
-        <table id="example" data-tw-merge="" class="w-full text-left -mt-2 border-separate border-spacing-y-[10px]">
+        {{-- <table id="example" data-tw-merge="" class="w-full text-left -mt-2 border-separate border-spacing-y-[10px]">
             <thead data-tw-merge="" class="custom-thead">
                 <tr data-tw-merge="" class="">
                     <th  class="font-medium px-5 py-3 dark:border-darkmode-300 whitespace-nowrap border-b-0">
@@ -47,6 +47,9 @@
                   
                     <th  class="font-medium px-5 py-3 dark:border-darkmode-300 whitespace-nowrap border-b-0 text-center">
                         STATUS
+                    </th>
+                    <th  class="font-medium px-5 py-3 dark:border-darkmode-300 whitespace-nowrap border-b-0 text-center">
+                        Action
                     </th>
                    
                 </tr>
@@ -83,13 +86,18 @@
                             <i data-tw-merge="" data-lucide="check-square" class="stroke-1.5 mr-2 h-4 w-4"></i>
                             {{ ($list->is_active=='Y')?"Active":"Inactive" }}    
                         </div>
-                    </td>                   
+                    </td>   
+                    <td>
+                        <a data-tw-merge data-tw-toggle="modal" data-mode="Edit" data-tableid="{{ $list->id }}" data-tw-target="#header-footer-slide-over-preview" href="#" 
+                            class="leftSideModel transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" class="lucide lucide-plus stroke-1.5 h-4 w-4"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>Edit </a>
+                    </td>                
                 </tr>
                 @endforeach
 
             </tbody>
-        </table>
+        </table> --}}
     </div>
 </div>
 <script src="{{ asset('assets/js/admin') }}/asset_type.js"></script>
+
 

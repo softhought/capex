@@ -46,9 +46,21 @@ Route::prefix('admin')->middleware(['admin_auth'])->group(function () {
    /** Asset Type Master */
    Route::post('assettype/getdata', [MasterController::class, 'getdataassetstype']);
    Route::post('assettype/status', [MasterController::class, 'assetsTypeStatus']);
-  Route::get('assettype/addedit/{id?}', [MasterController::class, 'assetsTypeAddEdit']);
-  Route::post('departmentaddeditajax', [MasterController::class, 'departmentAddEditAction']);
+  Route::post('assettype/addedit', [MasterController::class, 'assetsTypeAddEdit']);
+  Route::post('assettypeaddeditajax', [MasterController::class, 'assettypeAddEditAction']);
   Route::post('departmentexcelajax', [MasterController::class, 'departmentExcel']);
+
+  /** Business Division Master */
+  Route::post('businessdivision/getdata', [MasterController::class, 'getbusinessdivision']);
+  Route::post('businessdivision/status', [MasterController::class, 'businessdivisionStatus']);
+  Route::post('businessdivision/addedit', [MasterController::class, 'businessdivisionAddEdit']);
+  Route::post('businessdivisionajax', [MasterController::class, 'businessdivisionAddEditAction']);
+
+    /** Approver Master */
+    Route::post('approver/getdata', [MasterController::class, 'getApprover']);
+    Route::post('approver/addedit', [MasterController::class, 'ApproverAddEdit']);
+    Route::post('approverajax', [MasterController::class, 'approverAddEditAction']);
+  
 
   Route::post('log/{table}/{rowid}', [LayoutController::class, 'logActivity']);
 

@@ -1,7 +1,9 @@
 <?php
 
-namespace App\View\Components\admin;
+namespace App\View\Components;
 
+use Closure;
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class inputComponent extends Component
@@ -36,10 +38,8 @@ class inputComponent extends Component
         $this->maxlength = $maxlength;
         $this->readonly = $readonly;
     }
-    public function render()
+    public function render(): View|Closure|string
     {
-        // $data['value'] = $this->value;
-        // pre($data['value']);exit;
-        return view('components.admin.input-component');
+        return view('components.input-component');
     }
 }

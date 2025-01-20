@@ -1,53 +1,23 @@
 $(function () {
-    tomReset();
+
     var base_url = $("#base_url").val();
-    loadData(base_url); 
-        $(document).on("click", ".status", function (e) {    
-        e.preventDefault();
-        var id = $(this).data("id");
-        var icon = $(this).find("i");
-        var urlpath = base_url + "/admin/assettype/status";
-        var csrfToken = $('meta[name="csrf-token"]').attr("content");
+    loadData(base_url);
+ 
 
-        $.ajax({
-            type: "POST",
-            url: urlpath,
-            data: { id: id },
-            headers: {
-                "X-CSRF-TOKEN": csrfToken,
-            },
-            success: function (response) {
-                if (response.status === "Y") {
-                    id.removeClass("fa-times-circle")
-                        .addClass("fa-check-circle")
-                        .css("color", "green");
-                } else {
-                    id.removeClass("fa-check-circle")
-                        .addClass("fa-times-circle")
-                        .css("color", "red");
-                }
-              
-            },
-            error: function (xhr, status, error) {
-                console.error("Error updating question status:", error);
-            },
-        });
-    });
-
-    $(document).on("click", ".leftSideModel", function (e) {    
+    $(document).on("click", ".leftSideModel", function (e) {
         e.preventDefault();
         var mode = $(this).data("mode");
-        var title = mode+" Asset Type";
+        var title = mode + " Approver";
         var tableid = $(this).data("tableid");;
         var icon = $(this).find("i");
-        var urlpath = base_url + "/admin/assettype/addedit";
+        var urlpath = base_url + "/admin/approver/addedit";
         var csrfToken = $('meta[name="csrf-token"]').attr("content");
 
         $.ajax({
             type: "post",
             url: urlpath,
             data: {
-                id: tableid  
+                id: tableid
             },
             headers: {
                 "X-CSRF-TOKEN": csrfToken,
@@ -56,20 +26,20 @@ $(function () {
                 $("#model_data_details").html(response);
                 $("#slide-over-title").html(title);
                 initializeTomSelect();
-               
-               
+
+
             },
         });
 
 
-      
+
     });
 
 
-    
-    $(document).on("submit", "#assetTypeForm", function (e) {
+
+    $(document).on("submit", "#dataForm", function (e) {
         e.preventDefault();
-        var urlpath = base_url + "/admin/assettypeaddeditajax";
+        var urlpath = base_url + "/admin/approverajax";
         var mode = $("#mode").val();
         var formData = new FormData($(this)[0]);
         $("#savebtn").addClass("d-none");
@@ -97,14 +67,14 @@ $(function () {
                 if (response.msg_status == 1) {
 
                     if (mode == "Add") {
-                       $('#assetTypeForm')[0].reset();
-                       $(".error-text").text('');
-                    
-                       
+                        $('#dataForm')[0].reset();
+                        $(".error-text").text('');
+
+
                     } else {
-                   //  window.location.href = basepath+'/employee'
+                        //  window.location.href = basepath+'/employee'
                     }
-                    loadData(base_url); 
+                    loadData(base_url);
                     $("#success_msg").text(response.msg_data);
                     setTimeout(() => {
                         document.querySelector('[data-tw-dismiss="modal"]').click();
@@ -126,7 +96,7 @@ $(function () {
 
 
 function loadData(base_url) {
-    var urlpath = base_url + "/admin/assettype/getdata";
+    var urlpath = base_url + "/admin/approver/getdata";
     var csrfToken = $('meta[name="csrf-token"]').attr("content");
 
     $.ajax({
@@ -136,10 +106,10 @@ function loadData(base_url) {
             "X-CSRF-TOKEN": csrfToken,
         },
         success: function (response) {
-            $("#assettype_data").html(response);
-            $("#example").DataTable({"lengthChange": false });
-           
+            $("#table_data").html(response);
+            $("#example").DataTable({ "lengthChange": false });
+
         },
     });
-    
+
 }

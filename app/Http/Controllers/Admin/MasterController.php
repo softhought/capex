@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\LayoutController;
+use App\Models\Approver;
 use App\Models\AssetGroup;
 use App\Models\AssetType;
+use App\Models\BusinessDivision;
+use App\Models\Company;
 use App\Models\Employee;
+use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -70,32 +74,57 @@ class MasterController extends Controller
     }
 
 
-    public function assetsTypeAddEdit($id = '')
-    {
+    public function assetsTypeAddEdit(Request $request)
+    { $id=$request->post('id');
         $data = LayoutController::addEditCommon($id);
         $data['editData'] = [];
 
         if ($id > 0) {
             $data['editData'] = AssetType::find($id);
         }
+
+       // pre($data);exit;
+
+        $data['assetgroup']=AssetGroup::get();
+        $data['company']=Company::get();
      
         return view('admin/master/assettype_addedit', $data);
        // return LayoutController::loadAdmin($data);
     }
 
-    public function plantAddEditAction(Request $request)
+    public function assettypeAddEditAction(Request $request)
     {
         $id = $request->post('id');
         $mode = $request->post('mode');
-        $plant_name = $request->post('plant_name');
-        $head_emp_id = $request->post('head_emp_id');
+        $company_id = $request->post('company_id');
+        $asset_group_id = $request->post('asset_group_id');
+        $asset_type = $request->post('asset_type');
+        $sap_asset_class = $request->post('sap_asset_class');
+        $block_key = $request->post('block_key');
+        $is_procurement_indicator = $request->post('is_procurement_indicator');
 
         $validator = Validator::make($request->all(), [
-            'plant_name' => [
-                'required',
-                Rule::unique('plant_master', 'plant_name')->ignore($id, 'id')
-            ]
-        ]);
+            // 'email' => [
+            //     'required',
+            //     Rule::unique('users', 'username')->ignore($id, 'id')
+            // ],
+            'company_id' => 'required',
+            'asset_group_id' => 'required',
+            'asset_type' => 'required',
+            'sap_asset_class' => 'required',
+            'block_key' => 'required',
+            'is_procurement_indicator' => 'required',
+           
+
+        ],[
+            'company_id.required' => 'Asset Owner is required.', 
+            'asset_group_id.required' => 'Asset Group is required.', 
+            'asset_type.required' => 'Asset Type is required.', 
+            'sap_asset_class.required' => 'Sap asset class is  required.', 
+            'block_key.required' => 'Block key is  required.', 
+            'is_procurement_indicator.required' => 'Procurement Indicator is  required.', 
+          
+          ]);
 
 
         if ($validator->fails()) {
@@ -103,18 +132,203 @@ class MasterController extends Controller
         }
 
         if ($mode == "Edit") {
-            $model = Plant::find($id);
+            $model = AssetType::find($id);
         } else {
-            $model = new Plant();
+            $model = new AssetType();
         }
 
-        $model->plant_name = $plant_name;
-        $model->head_emp_id = $head_emp_id;
+        $model->company_id = $company_id;
+        $model->asset_group_id = $asset_group_id;
+        $model->asset_type = $asset_type;
+        $model->sap_asset_class = $sap_asset_class;
+        $model->block_key = $block_key;
+        $model->is_procurement_indicator = $is_procurement_indicator;
         $model->save();
 
         insertLog($model, $mode);
 
-        return response()->json(['errors' => [], 'msg_status' => 1, 'msg_data' => '']);
+        return response()->json(['errors' => [], 'msg_status' => 1, 'msg_data' => 'Data Successfully Saved']);
+    }
+
+    public function employees()
+    {     
+        $result['employeeList'] = Employee::with(['manager' => function ($query) {
+            $query->select('emp_no', 'emp_name'); // Select only necessary fields
+        }])->get();
+
+        // foreach ($result['employeeList'] as $employee) {
+        //    // echo "Employee: " . $employee->emp_name . "\n";
+        //     echo "<br>Manager: " . ($employee->manager ? $employee->manager->emp_name : 'No Manager Found') . "\n";
+        // }
+        // exit;
+        // pre($result['employeeList']);exit;
+        $data['bodyView'] = view('admin/master/employee_list', $result);
+        return LayoutController::loadAdmin($data);
+    }
+
+    public function location()
+    {     
+        $result['locationList'] = Location::get();
+    //    pre($result['locationList']);exit;
+        $data['bodyView'] = view('admin/master/location_list', $result);
+        return LayoutController::loadAdmin($data);
+    }
+
+    public function businessdivision()
+    {     
+       
+        $result=[];
+        $data['bodyView'] = view('admin/master/business_division_list', $result);
+        return LayoutController::loadAdmin($data);
+    }
+
+
+    public function getbusinessdivision()
+    {     
+        $result['BusinessDivisionList'] = BusinessDivision::join('location_master', 'location_master.id', '=', 'business_division.location_id')
+        ->select('business_division.*','location_name')
+        ->get();
+      return $data['bodyView'] = view('admin/master/business_division_partial_view', $result);
+    }
+
+    public function businessdivisionStatus(Request $request)
+    {
+        $id = $request->post('id');
+        $status = BusinessDivision::where(['id' => $id])->first();
+        $updatedStatus = $status->is_active == "Y" ? "N" : "Y";
+
+        $status->is_active = $updatedStatus;
+        $status->save();
+
+        insertLog($status, "Edit");
+        return response()->json(['success' => true, 'status' => $updatedStatus, 'message' => 'Status updated successfully']);
+    }
+
+    public function businessdivisionAddEdit(Request $request)
+    {
+        $id=$request->post('id');
+        $data = LayoutController::addEditCommon($id);
+        $data['editData'] = [];
+
+        if ($id > 0) {
+            $data['editData'] = BusinessDivision::find($id);
+        }
+
+        $data['location']=Location::get();
+        $data['employeeList']=Employee::
+        select('employees.*', DB::raw('concat(employees.emp_name," (",employees.emp_no, ")") as select_text'))
+        ->orderBy('emp_name', 'asc')
+        ->get();
+     
+      //  pre($data['employeeList']->toArray());exit;
+        return view('admin/master/businessdivision_addedit', $data);
+    }
+
+    public function businessdivisionAddEditAction(Request $request)
+    {
+        $id = $request->post('id');
+        $mode = $request->post('mode');
+
+        $location_id = $request->post('location_id');
+        $business_division = $request->post('business_division');
+        $business_head_emp_code = $request->post('business_head_emp_code');
+
+        $validator = Validator::make($request->all(), [
+            'location_id' => 'required',
+            'business_division' => 'required',
+        ],[
+            'location_id.required' => 'Location is required.', 
+            'business_division.required' => 'Business Division is required.', 
+          ]);
+
+
+        if ($validator->fails()) {
+            return response()->json(['msg_status' => 0, 'errors' => $validator->errors()]);
+        }
+
+        if ($mode == "Edit") {
+            $model = BusinessDivision::find($id);
+        } else {
+            $model = new BusinessDivision();
+        }
+
+
+        $model->location_id = $location_id;
+        $model->business_division = $business_division;
+        $model->business_head_emp_code = $business_head_emp_code;
+        $model->save();
+        insertLog($model, $mode);
+        return response()->json(['errors' => [], 'msg_status' => 1, 'msg_data' => 'Data Successfully Saved']);
+    }
+
+
+    public function approver()
+    { 
+        $data['bodyView'] = view('admin/master/approver_list', []);
+        return LayoutController::loadAdmin($data);
+    }
+
+    public function getApprover()
+    {     
+        $result['approverList'] = Approver::leftjoin('employees', 'employees.emp_no', '=', 'approver_details.emp_code')
+        ->select('approver_details.*','employees.emp_no','employees.emp_name')
+        ->get();
+      return $data['bodyView'] = view('admin/master/approver_list_partial_view', $result);
+    }
+
+    public function ApproverAddEdit(Request $request)
+    {
+        $id=$request->post('id');
+        $data = LayoutController::addEditCommon($id);
+        $data['editData'] = [];
+
+        if ($id > 0) {
+            $data['editData'] = Approver::find($id);
+        }
+
+        $data['location']=Location::get();
+        $data['employeeList']=Employee::
+        select('employees.*', DB::raw('concat(employees.emp_name," (",employees.emp_no, ")") as select_text'))
+        ->orderBy('emp_name', 'asc')
+        ->get();
+     
+      //  pre($data['employeeList']->toArray());exit;
+        return view('admin/master/approver_addedit', $data);
+    }
+
+    public function approverAddEditAction(Request $request)
+    {
+        $id = $request->post('id');
+        $mode = $request->post('mode');
+
+        $approver_name = $request->post('approver_name');
+        $emp_code = $request->post('emp_code');
+
+        $validator = Validator::make($request->all(), [
+            'approver_name' => 'required',
+            'emp_code' => 'required',
+        ],[
+            'approver_name.required' => 'Approver Name is required.', 
+            'emp_code.required' => 'Employee is required.', 
+          ]);
+
+
+        if ($validator->fails()) {
+            return response()->json(['msg_status' => 0, 'errors' => $validator->errors()]);
+        }
+
+        if ($mode == "Edit") {
+            $model = Approver::find($id);
+        } else {
+            $model = new Approver();
+        }
+
+
+        $model->approver_name = $approver_name;
+        $model->emp_code = $emp_code;
+        $model->save();
+        insertLog($model, $mode);
+        return response()->json(['errors' => [], 'msg_status' => 1, 'msg_data' => 'Data Successfully Saved']);
     }
 
     

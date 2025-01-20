@@ -3,6 +3,7 @@ $(function () {
     $(".datatables-basic").DataTable({ scrollX: true });
     $(".datatables-basic2").DataTable();
     $(".datatables-basic3").DataTable({ scrollX: true });
+    $("#example").DataTable({"lengthChange": false });
     
     getCommon();
     $(document).on('click', '.openModal', function (e) {
@@ -80,7 +81,7 @@ $(document).on('change', '.readUrl', function () {
 
 
 
-$(".datepicker").flatpickr({ dateFormat: "d/m/Y" });
+// $(".datepicker").flatpickr({ dateFormat: "d/m/Y" });
 // $(".datepicker2").datepicker({ format: "dd/mm/yyyy",autoclose:true });
 // $(".flatpickr-range").flatpickr({
 //     dateFormat: "d-m-Y",

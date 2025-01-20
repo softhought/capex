@@ -66,3 +66,53 @@ function enableButton(status, mode = 'Save') {
         $("#savebtn").prop("disabled", false);
     }
 }
+
+
+function initializeTomSelect() {
+    $(".tom-select").each(function () {
+      // Skip if already initialized
+      if ($(this).data("tomselect")) return;
+
+      let e = { plugins: { dropdown_input: {} } };
+      if ($(this).data("placeholder")) {
+        e.placeholder = $(this).data("placeholder");
+      }
+      if ($(this).attr("multiple") !== undefined) {
+        e = {
+          ...e,
+          plugins: {
+            ...e.plugins,
+            remove_button: { title: "Remove this item" },
+          },
+          persist: false,
+          create: true,
+          onDelete: function (t) {
+            return confirm(
+              t.length > 1
+                ? "Are you sure you want to remove these " + t.length + " items?"
+                : 'Are you sure you want to remove "' + t[0] + '"?'
+            );
+          },
+        };
+      }
+      if ($(this).data("header")) {
+        e = {
+          ...e,
+          plugins: {
+            ...e.plugins,
+            dropdown_header: { title: $(this).data("header") },
+          },
+        };
+      }
+
+      // Initialize TomSelect
+      new TomSelect(this, e);
+    });
+}
+
+
+function tomReset() {
+    $(".tom-select").each(function () {
+      $(this).data("tomselect").setValue("1");
+    });
+}

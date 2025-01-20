@@ -15,13 +15,18 @@ class Employee extends Model
         return $this->belongsTo(Role::class);
     }
 
-    public function companyMaster()
+    public function manager()
     {
-        return $this->belongsTo(Company::class, 'company');
+        return $this->hasOne(Employee::class, 'emp_no', 'manager_code');
     }
 
-    public function gradeMaster()
-    {
-        return $this->belongsTo(Grade::class, 'grade');
-    }
+    // public function companyMaster()
+    // {
+    //     return $this->belongsTo(Company::class, 'company');
+    // }
+
+    // public function gradeMaster()
+    // {
+    //     return $this->belongsTo(Grade::class, 'grade');
+    // }
 }

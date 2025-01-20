@@ -4,7 +4,7 @@
 }
 
 .marginTopMinus40{
-    margin-top: -40px!important;
+    margin-top: -20px!important;
 }
 
 .custom-thead {
@@ -18,3 +18,62 @@
     padding: 10px;
     border-bottom: 2px solid #0056b3;
 }
+
+.error-text{
+    font-weight: 400;
+  font-size: 13px;
+
+}
+.plugin-dropdown_input .dropdown-input {
+    padding: 4px;
+}
+[type="text"]{
+    font-size: 0.8rem;
+}
+label{
+    color: #0b1e55 !important; 
+}
+
+/* General button styles */
+.pagination a {
+ 
+    padding: 3px 15px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 6px!important; 
+  }
+  
+  /* Hover state */
+  .pagination a:hover {
+    background-color: #1a2f6e; /* Background color on hover */
+    color: #ffffff; /* Text color on hover */
+    border-color: #1a2f6e;; /* Border color on hover */
+  }
+  
+  /* Active button styles */
+  .pagination a[aria-current="page"] {
+    background-color: #1a2f6e;; /* Background color for active page */
+    color: #ffffff; /* Text color for active page */
+   /* border-color: #1a2f6e;  Border color for active page */
+    font-weight: bold; /* Highlight the active button */
+  }
+  
+  /* Disabled buttons */
+  .pagination a[aria-disabled="true"] {
+    background-color: #e9ecef; /* Disabled background */
+    color: #6c757d; /* Disabled text color */
+    pointer-events: none; /* Prevent clicks */
+    border-color: #e9ecef; /* Disabled border color */
+  }
+  
+  /* First and Last button rounded corners */
+  .pagination a.first {
+    border-radius: 5px 0 0 5px; /* Rounded left corners */
+  }
+  
+  .pagination a.last {
+    border-radius: 0 5px 5px 0; /* Rounded right corners */
+  }
+
+  .focus\:ring:focus {box-shadow: none;}
+  

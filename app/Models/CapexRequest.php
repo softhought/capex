@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AssetGroup extends Model
+class CapexRequest extends Model
 {
     use HasFactory;
-    protected $table = 'asset_group_master';
+    protected $table = 'capex_request';
+    
 }

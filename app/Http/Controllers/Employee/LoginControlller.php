@@ -16,7 +16,7 @@ class LoginControlller extends Controller
     public function index(Request $request)
     {
         // pre($request->session());exit;   
-        if ($request->session()->has('pptcEmployee.employeeId')) {
+        if ($request->session()->has('capexEmployee.employeeId')) {
             return redirect('emp-dashboard');
         } else {
             $operand1 = rand(1, 10);
@@ -36,12 +36,13 @@ class LoginControlller extends Controller
         $validator = Validator::make($request->all(), [
             'emp_code' => 'required',
             'password' => 'required',
-            'captcha_input' => 'required|integer|in:' . session('employee_captcha.captchaSum'),
+         //   'captcha_input' => 'required|integer|in:' . session('employee_captcha.captchaSum'),
         ],
          [
-            'captcha_input.required'=>'The captcha filled is required',
-            'captcha_input.integer'=>'The captcha filled is invalid',
-            'captcha_input.in'=>'The captcha filled is invalid',
+            'emp_code.required'=>'Employee code is required',
+            // 'captcha_input.required'=>'The captcha filled is required',
+            // 'captcha_input.integer'=>'The captcha filled is invalid',
+            // 'captcha_input.in'=>'The captcha filled is invalid',
          ]
         );
         if ($validator->fails()) {
@@ -49,8 +50,8 @@ class LoginControlller extends Controller
         }else{
             $emp_no = $request->post('emp_code');
             $password = $request->post('password');
-            $result = Employee::where(['emp_no' => $emp_no, 'is_active' => 1])->first();
-            // pre($result);exit;
+            $result = Employee::where(['emp_no' => $emp_no, 'is_active' => 'Y'])->first();
+           
            // pre(Hash::make($password));exit;
             if ($result) {
                 if (Hash::check($password, $result->password)) {
@@ -83,21 +84,21 @@ class LoginControlller extends Controller
 
     public function logout()
     {
-        $pptcEmployee = session()->get('pptcEmployee');
-        $employeeId = $pptcEmployee['employeeId'];
+        $capexEmployee = session()->get('capexEmployee');
+        $employeeId = $capexEmployee['employeeId'];
 
         $user = Employee::find($employeeId);
         $user->is_online = "0";
         $user->save();
 
-        session()->forget('pptcEmployee');
+        session()->forget('capexEmployee');
         session()->flash('logout', 'Logout sucessfully');
         return redirect('/');
     }
 
     private function setSessionData($result)
     {
-        session(['pptcEmployee' => $result]);
+        session(['capexEmployee' => $result]);
 
     }
 

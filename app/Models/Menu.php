@@ -36,8 +36,8 @@ class Menu extends Model
             ->select(DB::raw('DISTINCT menus.*'))
             ->orderBy('menus.menu_srl');
         }else{
-            $pptcEmployee = session()->get('pptcEmployee');
-                      //  pre($pptcEmployee['emp_type']);exit;
+            $capexEmployee = session()->get('capexEmployee');
+                      //  pre($capexEmployee['emp_type']);exit;
             return $this->hasMany(Menu::class, 'parent_id')
             // ->leftJoin('menu_permissions', function($join) use ($roleId) {
             //     $join->on('menu_permissions.menu_id', '=', 'menus.id')
@@ -46,7 +46,7 @@ class Menu extends Model
             // })
             ->where('menus.is_active',"Y")
             ->where('menus.menu_for', '=', 'Employee')  
-            ->where('menus.emp_type', '=', $pptcEmployee['emp_type'])    // added this condition for menu_permissions
+            ->where('menus.emp_type', '=', $capexEmployee['emp_type'])    // added this condition for menu_permissions
             ->select(DB::raw('DISTINCT menus.*'))
             ->orderBy('menus.menu_srl');
         }
@@ -73,7 +73,7 @@ class Menu extends Model
             // ->select(DB::raw('DISTINCT menus.*'))
             ->orderBy('menus.menu_srl');
         }else{
-            $pptcEmployee = session()->get('pptcEmployee');
+            $capexEmployee = session()->get('capexEmployee');
             return $query
             // ->leftJoin('menu_permissions', function($join) use ($roleId) {
             //     $join->on('menus.id', '=', 'menu_permissions.menu_id')
@@ -81,7 +81,7 @@ class Menu extends Model
             // })
             ->whereNull('menus.parent_id')
             ->where('menus.menu_for', '=', 'Employee')    // added this condition for menu_permissions
-            ->where('menus.emp_type', '=', $pptcEmployee['emp_type'])    // added this condition for menu_permissions
+            ->where('menus.emp_type', '=', $capexEmployee['emp_type'])    // added this condition for menu_permissions
             ->where('menus.is_active','Y')
             // ->select(DB::raw('DISTINCT menus.*'))
             ->orderBy('menus.menu_srl');

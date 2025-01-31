@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class AssetType extends Model
 {
     use HasFactory;
-    protected $table = 'asset_type';
+    protected $table = 'asset_type_master';
 }

@@ -1,378 +1,364 @@
 <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" class="opacity-0" lang="en"><!-- BEGIN: Head -->
 
-<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr"
-    data-theme="theme-default" data-assets-path="{{ asset('assets') }}/" data-template="vertical-menu-template">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    {{-- <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="expires" content="0"> --}}
-    <title>PPTC - Dashboard </title>
-
-
+    <meta charset="utf-8">
+    <meta name="csrf-token" content="Koo2zWJKliRELq4FawEfkQPg3CJYusp6ppGFZw4O">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description"
-        content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
-    <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
-    <!-- Canonical SEO -->
-    <link rel="canonical" href="https://themeselection.com/item/sneat-dashboard-pro-bootstrap/">
+        content="Midone admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
+    <meta name="keywords"
+        content="admin template, midone Admin Template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="LEFT4CODE">
+    <title>Capex</title>
+    <!-- BEGIN: CSS Assets-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ asset('assets') }}/dist/css/vendors/tippy.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/dist/css/vendors/litepicker.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/dist/css/vendors/tiny-slider.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/dist/css/themes/rubick/side-nav.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/dist/css/vendors/leaflet.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/dist/css/vendors/simplebar.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/dist/css/components/mobile-menu.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/dist/css/vendors/tom-select.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/dist/css/app.css"> <!-- END: CSS Assets-->
+    <link rel="stylesheet" href="{{ asset('assets') }}/css/style.css"> <!-- END: CSS Assets-->
+    <script src="{{ asset('assets') }}/dist/js/vendors/dom.js"></script>
+    <script src="{{ asset('assets') }}/js/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.tailwindcss.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/vendors/lucide.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/vendors/tailwind-merge.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/vendors/tom-select.js"></script>
 
 
-    <!-- Favicon -->
-    {{-- <link rel="icon" type="image/x-icon" --}}
-        {{-- href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/img/favicon/favicon.ico" /> --}}
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com/">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap"
-        rel="stylesheet">
-
-    <!-- Icons -->
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/fonts/boxicons.css" />
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/fonts/fontawesome.css" />
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/fonts/flag-icons.css" />
-
-    <!-- Core CSS -->
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/css/rtl/core.css"
-        class="template-customizer-core-css" />
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/css/rtl/theme-default.css"
-        class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="{{ asset('assets') }}/css/demo.css" />
-
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/typeahead-js/typeahead.css" />
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/apex-charts/apex-charts.css" />
-
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/datatables-bs5/datatables.bootstrap5.css">
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css">
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css">
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css">
-
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/flatpickr/flatpickr.css" />
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.css" />
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.css" />
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/jquery-timepicker/jquery-timepicker.css" />
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/pickr/pickr-themes.css" />
-
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/select2/select2.css" />
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/toastr/toastr.css" />
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/animate-css/animate.css" />
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/css/pages/app-calendar.css" />
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/swiper/swiper.css" />
-
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/sweetalert2/sweetalert2.css" />
-
-
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/tagify/tagify.css" />
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/bootstrap-select/bootstrap-select.css" />
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/typeahead-js/typeahead.css" />
-    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/spinkit/spinkit.css" />
-    <link rel="stylesheet" href="{{ asset('assets') }}/css/custom/style.css" />
-    <!-- Page CSS -->
-
-    <!-- Helpers -->
-    <script src="{{ asset('assets') }}/vendor/js/helpers.js"></script>
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
-    {{-- <script src="{{ asset('assets') }}/vendor/js/template-customizer.js"></script> --}}
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="{{ asset('assets') }}/js/default/config.js"></script>
-    <script src="{{ asset('assets') }}/vendor/libs/jquery/jquery.js"></script>
-    <script src="{{ asset('assets') }}/vendor/libs/popper/popper.js"></script>
-    <script src="{{ asset('assets') }}/vendor/js/bootstrap.js"></script>
-    <script src="{{ asset('assets') }}/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="{{ asset('assets') }}/vendor/libs/hammer/hammer.js"></script>
-    <script src="{{ asset('assets') }}/vendor/libs/i18n/i18n.js"></script>
-    <script src="{{ asset('assets') }}/vendor/libs/typeahead-js/typeahead.js"></script>
-       <!-- Flat Picker -->
-       <script src="{{ asset('assets') }}/vendor/libs/moment/moment.js"></script>
-       <script src="{{ asset('assets') }}/vendor/libs/flatpickr/flatpickr.js"></script>
-
-    <script src="{{ asset('assets') }}/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
-    <script src="{{ asset('assets') }}/vendor/libs/select2/select2.js"></script>
-    <script src="{{ asset('assets') }}/vendor/libs/toastr/toastr.js"></script>
-    <script src="{{ asset('assets') }}/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.js"></script>
-     <script src="{{ asset('assets') }}/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.js"></script>
-     <script src="{{ asset('assets') }}/vendor/libs/jquery-timepicker/jquery-timepicker.js"></script>
-     <script src="{{ asset('assets') }}/vendor/libs/pickr/pickr.js"></script>
-     <script src="{{ asset('assets') }}/vendor/libs/dropzone/dropzone.js"></script>
-     <script src="{{ asset('assets') }}/vendor/libs/bs-stepper/bs-stepper.js"></script>
-     <script src="{{ asset('assets') }}/vendor/libs/tagify/tagify.js"></script>
-    <script src="{{ asset('assets') }}/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
-    <script src="{{ asset('assets') }}/vendor/libs/typeahead-js/typeahead.js"></script>
-    <script src="{{ asset('assets') }}/vendor/libs/bloodhound/bloodhound.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-
-    <script src="{{ asset('assets') }}/vendor/js/menu.js"></script>
-
-    <!-- endbuild -->
-
-    <script src="{{ asset('assets') }}/vendor/libs/sweetalert2/sweetalert2.js"></script>
     <script src="{{ asset('assets') }}/js/custom/ajaxsetup.js"></script>
 
 </head>
+<!-- END: Head -->
 
 <body>
 
-    <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar  ">
-        <div class="layout-container">
+    <div
+        class="rubick px-5 sm:px-8 py-5 bodyPaddLeftRight before:content-[''] before:bg-gradient-to-b before:from-theme-1 before:to-theme-2 dark:before:from-darkmode-800 dark:before:to-darkmode-800 before:fixed before:inset-0 before:z-[-1]">
+        <!-- BEGIN: Mobile Menu -->
+        <div
+            class="mobile-menu group top-0 inset-x-0 fixed bg-theme-1/90 z-[60] border-b border-white/[0.08] dark:bg-darkmode-800/90 md:hidden before:content-[''] before:w-full before:h-screen before:z-10 before:fixed before:inset-x-0 before:bg-black/90 before:transition-opacity before:duration-200 before:ease-in-out before:invisible before:opacity-0 [&.mobile-menu--active]:before:visible [&.mobile-menu--active]:before:opacity-100">
+            <div class="flex h-[70px] items-center px-3 sm:px-8">
+                <a class="mr-auto flex" href="#">
+                    <img class="w-6" src="{{ asset('assets') }}/dist/images/logo.png" alt="GEPL Capex">
+                </a>
+                <a class="mobile-menu-toggler" href="#">
+                    <i data-tw-merge="" data-lucide="bar-chart2"
+                        class="stroke-1.5 h-8 w-8 -rotate-90 transform text-white"></i>
+                </a>
+            </div>
+            <div
+                class="scrollable h-screen z-20 top-0 left-0 w-[270px] -ml-[100%] bg-primary transition-all duration-300 ease-in-out dark:bg-darkmode-800 [&[data-simplebar]]:fixed [&_.simplebar-scrollbar]:before:bg-black/50 group-[.mobile-menu--active]:ml-0">
+                <a href="#"
+                    class="fixed top-0 right-0 mt-4 mr-4 transition-opacity duration-200 ease-in-out invisible opacity-0 group-[.mobile-menu--active]:visible group-[.mobile-menu--active]:opacity-100">
+                    <i data-tw-merge="" data-lucide="x-circle"
+                        class="stroke-1.5 mobile-menu-toggler h-8 w-8 -rotate-90 transform text-white"></i>
+                </a>
+                <ul class="py-2">
+                    <li>
+                        <a class="menu menu--active" href="rubick-side-menu-inbox-page.html">
+                            <div class="menu__icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" data-lucide="inbox"
+                                    class="lucide lucide-inbox stroke-1.5 w-5 h-5">
+                                    <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline>
+                                    <path
+                                        d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="menu__title">
+                                Inbox
+                            </div>
+                        </a>
+                    </li>
 
-            <!-- Menu -->
+                    <li>
+                        <a class="menu" href="javascript:;">
+                            <div class="menu__icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" data-lucide="home"
+                                    class="lucide lucide-home stroke-1.5 w-5 h-5">
+                                    <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                </svg>
+                            </div>
+                            <div class="menu__title">
+                                Dashboard
+                                <div class="menu__sub-icon transform rotate-180">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down"
+                                        class="lucide lucide-chevron-down stroke-1.5 w-5 h-5">
+                                        <path d="m6 9 6 6 6-6"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </a>
+                        <ul class="menu__sub-open" style="display: block;">
+                            <li>
+                                <a class="menu" href="rubick-side-menu-dashboard-overview-1-page.html">
+                                    <div class="menu__icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            data-lucide="activity" class="lucide lucide-activity stroke-1.5 w-5 h-5">
+                                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="menu__title">
+                                        Overview 1
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="menu" href="rubick-side-menu-dashboard-overview-2-page.html">
+                                    <div class="menu__icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            data-lucide="activity" class="lucide lucide-activity stroke-1.5 w-5 h-5">
+                                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="menu__title">
+                                        Overview 2
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="menu" href="rubick-side-menu-dashboard-overview-3-page.html">
+                                    <div class="menu__icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            data-lucide="activity" class="lucide lucide-activity stroke-1.5 w-5 h-5">
+                                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="menu__title">
+                                        Overview 3
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="menu" href="rubick-side-menu-dashboard-overview-4-page.html">
+                                    <div class="menu__icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            data-lucide="activity" class="lucide lucide-activity stroke-1.5 w-5 h-5">
+                                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="menu__title">
+                                        Overview 4
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- END: Mobile Menu -->
 
-            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 
-                <div class="app-brand demo ">
-                    <a href="{{url('/')}}" class="app-brand-link">
-
-                        <span class="app-brand-text demo menu-text fw-bold ms-2 text-uppercase ">Emp Panel</span>
-                    </a>
-
-                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                        <i class="bx bx-chevron-left bx-sm align-middle"></i>
-                    </a>
-                </div>
-
-                <div class="menu-inner-shadow"></div>
-
-
-
-                <ul class="menu-inner py-1">
-
+        <div class="mt-[4.7rem] flex md:mt-0">
+            <!-- BEGIN: Side Menu -->
+            <nav class="side-nav hidden w-[80px] overflow-x-hidden pb-16 pr-5 md:block xl:w-[230px]">
+                <a class="flex items-center pt-4 pl-5 intro-x" href="#">
+                    <img class="w-6" src="{{ asset('assets') }}/dist/images/logo.png" alt="GEPL Capex">
+                    <span class="hidden ml-3 text-lg text-white xl:block"> Capex-Employee </span>
+                </a>
+                <div class="my-6 side-nav__divider"></div>
+                <input type="hidden" name="base_url" id="base_url" value="{{ url('/') }}">
+                <ul>
                     @php
-                        $pptcEmployee = session()->get('pptcEmployee');
-                       // pre($pptcEmployee['emp_type']);exit;
-                        $roleId = $pptcEmployee['roleId'];
-                        $name = $pptcEmployee['employeeName'];
-                        $role = $pptcEmployee['role'];
-
+                        $capexEmployee = session()->get('capexEmployee');
+                       // pre($capexEmployee['emp_type']);exit;
+                        $roleId = $capexEmployee['roleId'];
+                        $name = $capexEmployee['employeeName'];
+                        $role = $capexEmployee['role'];
                     @endphp
                     {!! getTopNavCat($roleId) !!}
                 </ul>
 
-
-
-            </aside>
-            <!-- / Menu -->
-
-
-
-            <!-- Layout container -->
-            <div class="layout-page">
-
-
-
-
-
-                <!-- Navbar -->
-
-
-
-
-                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-                    id="layout-navbar">
-
-
-
-                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0   d-xl-none ">
-                        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-                            <i class="bx bx-menu bx-sm"></i>
-                        </a>
-                    </div>
-
-
-                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-
-
-
-
-                        <!-- Search -->
-                        <div class="navbar-nav align-items-center">
-                            <div class="nav-item navbar-search-wrapper mb-0">
-                                <a class="nav-item nav-link search-toggler px-0" href="javascript:void(0);">
-                                    <i class="bx bx-search bx-sm"></i>
-                                    <span class="d-none d-md-inline-block text-muted">Search </span>
-                                </a>
-                            </div>
-                        </div>
-                        <!-- /Search -->
-
-
-
-
-
-                        <ul class="navbar-nav flex-row align-items-center ms-auto">
-
-
-                            <!-- User -->
-                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
-                                    data-bs-toggle="dropdown">
-                                    <div class="avatar avatar-online">
-                                        <img src="{{ asset('assets') }}/img/img_avatar.png" alt
-                                            class="w-px-40 h-auto rounded-circle">
-                                    </div>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li>
-                                        <a class="dropdown-item" href="pages-account-settings-account.html">
-                                            <div class="d-flex">
-                                                <div class="flex-shrink-0 me-3">
-                                                    <div class="avatar avatar-online">
-                                                        <img src="{{ asset('assets') }}/img/img_avatar.png" alt
-                                                            class="w-px-40 h-auto rounded-circle">
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <span class="fw-medium d-block">{{ $name }}</span>
-                                                    <small class="text-muted">{{ $role }}-{{ $pptcEmployee['empCode'] }}</small>
-                                                    <span class="fw-medium d-block">
-                                                        @php
-                                                            if($pptcEmployee['emp_type']=="INITIATOR" || $pptcEmployee['emp_type']=="MANAGER"){
-                                                                echo $pptcEmployee['emp_type'];
-                                                            }
-                                                        @endphp
-                                                       </span> 
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    {{-- <li>
-                                        <div class="dropdown-divider"></div>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="pages-profile-user.html">
-                                            <i class="bx bx-user me-2"></i>
-                                            <span class="align-middle">My Profile</span>
-                                        </a>
-                                    </li> --}}
-
-                                    <li>
-                                        <div class="dropdown-divider"></div>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="{{ url('logout') }}" >
-                                            <i class="bx bx-power-off me-2"></i>
-                                            <span class="align-middle">Log Out</span>
-                                        </a>
-                                    </li>
-                                </ul>
+            </nav>
+            <!-- END: Side Menu -->
+            <!-- BEGIN: Content -->
+            <div
+                class="md:max-w-auto min-h-screen min-w-0 max-w-full flex-1 rounded-[30px] bg-slate-100 px-4 pb-10 before:block before:h-px before:w-full before:content-[''] dark:bg-darkmode-700 md:px-[22px]">
+                <!-- BEGIN: Top Bar -->
+                <div class="relative z-[51] flex h-[67px] items-center border-b border-slate-200">
+                    <!-- BEGIN: Breadcrumb -->
+                    <nav aria-label="breadcrumb" class="flex -intro-x mr-auto hidden sm:flex">
+                        <ol class="flex items-center text-theme-1 dark:text-slate-300">
+                            <li class="">
+                                <a href="#">Application</a>
                             </li>
-                            <!--/ User -->
+                            <li
+                                class="relative ml-5 pl-0.5 before:content-[''] before:w-[14px] before:h-[14px] before:bg-chevron-black before:transform before:rotate-[-90deg] before:bg-[length:100%] before:-ml-[1.125rem] before:absolute before:my-auto before:inset-y-0 dark:before:bg-chevron-white text-slate-800 cursor-text dark:text-slate-400">
+                                {{-- <a href="#">Dashboard</a> --}}
+                                <a href="#"> @yield('title', '')</a>
+                            </li>
+                        </ol>
+                    </nav>
+                    <!-- END: Breadcrumb -->
 
-
-                        </ul>
-                    </div>
-
-
-                    <!-- Search Small Screens -->
-                    <div class="navbar-search-wrapper search-input-wrapper  d-none">
-                        <input type="text" class="form-control search-input container-xxl border-0"
-                            placeholder="Search..." aria-label="Search...">
-                        <i class="bx bx-x bx-sm search-toggler cursor-pointer"></i>
-                    </div>
-
-
-                </nav>
-
-
-
-                <!-- / Navbar -->
-
-
-
-                <!-- Content wrapper -->
-                <div class="content-wrapper">
-
-                      <!-- Toast with Animation -->
-                      <div class="bs-toast toast toast-success toast-ex animate__animated my-2" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="2000">
-                        <div class="toast-header">
-                        {{-- <i class='bx bx-bell me-2'></i>
-                        <div class="me-auto fw-medium">Bootstrap</div>
-                        <small>11 mins ago</small> --}}
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                        </div>
-                        <div class="toast-body d-inline-flex " id="toast_body_content">
-
-                        </div>
-                    </div>
-                    <!--/ Toast with Animation -->
-
-                    <div class="container-xxl flex-grow-1 container-p-y">
-                        {!! $bodyView !!}
-
-                        <x-admin.modal-layout id="commonModal" title="Add" dialogclass="modal-lg modal-dialog-centered" bodyclass="an-box-shadow">
-
-                        </x-admin.modal-layout>
-
-                        <div class="modal fade" id="excel_error" tabindex="-1" role="dialog"
-                        aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header p-3 bg-gradient-dark">
-                                    <h5 class="modal-title fa-1x p-1" style="color: #ffffff;" id="header_title">
-                                        Error <i class="fas fa-exclamation-triangle"></i></h5>
+                    
+                    <!-- BEGIN: Account Menu -->
+                    <div data-tw-merge="" data-tw-placement="bottom-end" class="dropdown relative"><button
+                            data-tw-toggle="dropdown" aria-expanded="false"
+                            class="cursor-pointer image-fit zoom-in intro-x block h-8 w-8 overflow-hidden rounded-full shadow-lg"><img
+                                src="{{ asset('assets') }}/dist/images/fakers/profile-5.jpg" alt="GEPL Capex">
+                        </button>
+                        <div data-transition="" data-selector=".show"
+                            data-enter="transition-all ease-linear duration-150"
+                            data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1"
+                            data-enter-to="!mt-1 visible opacity-100 translate-y-0"
+                            data-leave="transition-all ease-linear duration-150"
+                            data-leave-from="!mt-1 visible opacity-100 translate-y-0"
+                            data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1"
+                            class="dropdown-menu absolute z-[9999] hidden">
+                            <div data-tw-merge=""
+                                class="dropdown-content rounded-md border-transparent p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 mt-px w-56 bg-theme-1 text-white">
+                                <div class="p-2 font-medium font-normal">
+                                    <div class="font-medium">{{ $name }}</div>
+                                    <div class="mt-0.5 text-xs text-white/70 dark:text-slate-500">
+                                        {{ $role }}-{{ $capexEmployee['empCode'] }}
+                                    </div>
                                 </div>
-
-                                <div class="modal-body" id="errBodyContent"></div>
-                                <center>
-                                    <h5 class="ml-5" style="color: red; font-size: 14px">Note: Some fields are
-                                        missing, contain duplicate
-                                        entries, or have an invalid data format.</h5>
-                                </center>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-sm btn-danger" id="closeerrmodal"
-                                        data-dismiss="modal">Close</button>
+                                <div class="h-px my-2 -mx-2 bg-slate-200/60 dark:bg-darkmode-400 bg-white/[0.08]">
                                 </div>
+                                <a
+                                    class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item hover:bg-white/5"><i
+                                        data-tw-merge="" data-lucide="user" class="stroke-1.5 mr-2 h-4 w-4"></i>
+                                    Profile</a>
+                                <a
+                                    class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item hover:bg-white/5"><i
+                                        data-tw-merge="" data-lucide="edit" class="stroke-1.5 mr-2 h-4 w-4"></i>
+                                    Add Account</a>
+                                <a
+                                    class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item hover:bg-white/5"><i
+                                        data-tw-merge="" data-lucide="lock" class="stroke-1.5 mr-2 h-4 w-4"></i>
+                                    Reset Password</a>
+                                <a
+                                    class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item hover:bg-white/5"><i
+                                        data-tw-merge="" data-lucide="help-circle"
+                                        class="stroke-1.5 mr-2 h-4 w-4"></i>
+                                    Help</a>
+                                <div class="h-px my-2 -mx-2 bg-slate-200/60 dark:bg-darkmode-400 bg-white/[0.08]">
+                                </div>
+                                <a href="{{ url('logout') }}"
+                                    class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item hover:bg-white/5"><i
+                                        data-tw-merge="" data-lucide="toggle-right"
+                                        class="stroke-1.5 mr-2 h-4 w-4"></i>
+                                    Logout</a>
                             </div>
                         </div>
                     </div>
-
-                        <input type="hidden" name="base_url" id="base_url" value="{{ url('/') }}">
-
-                    </div>
-
-
-
-
-                    <div class="content-backdrop fade"></div>
+                    <!-- END: Account Menu -->
                 </div>
-                <!-- Content wrapper -->
+                <!-- END: Top Bar -->
+
+                {!! $bodyView !!}
+
+
+
+
             </div>
-            <!-- / Layout page -->
+            <!-- END: Content -->
         </div>
-
-
-
-        <!-- Overlay -->
-        <div class="layout-overlay layout-menu-toggle"></div>
-
-
-        <div class="drag-target"></div>
-
     </div>
+    <!-- BEGIN: Vendor JS Assets-->
+    <script src="{{ asset('assets') }}/dist/js/vendors/tippy.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/vendors/dayjs.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/vendors/litepicker.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/vendors/popper.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/vendors/dropdown.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/vendors/tiny-slider.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/vendors/transition.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/vendors/chartjs.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/vendors/leaflet-map.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/vendors/axios.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/utils/colors.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/utils/helper.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/vendors/simplebar.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/vendors/modal.js"></script>
 
-     <!-- Vendors JS -->
-     <script src="{{ asset('assets') }}/vendor/libs/apex-charts/apexcharts.js"></script>
-
-    <!-- Main JS -->
-    <script src="{{ asset('assets') }}/js/default/main.js"></script>
-    <script src="{{ asset('assets') }}/js/default/forms-selects.js"></script>
-      <!-- Page JS -->
-  {{-- <script src="{{ asset('assets') }}//js/app-logistics-dashboard.js"></script> --}}
-
+    <script src="{{ asset('assets') }}/dist/js/components/base/theme-color.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/components/base/lucide.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/components/base/tippy.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/components/base/litepicker.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/components/report-line-chart.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/components/report-pie-chart.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/components/report-donut-chart.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/components/report-donut-chart-1.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/components/simple-line-chart-1.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/components/base/tiny-slider.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/themes/rubick.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/components/base/leaflet-map-loader.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/components/mobile-menu.js"></script>
+    <script src="{{ asset('assets') }}/dist/js/components/themes/rubick/top-bar.js"></script>
     <script src="{{ asset('assets') }}/js/custom/common.js"></script>
+    <!-- END: Vendor JS Assets-->
+
+
+
+    <!-- BEGIN: Pages, layouts, components JS Assets-->
+    <!-- END: Pages, layouts, components JS Assets-->
+
+
+
+    <!-- BEGIN: Slide Over Content -->
+    <div data-tw-backdrop="static" aria-hidden="true" tabindex="-1" id="header-footer-slide-over-preview"
+        class="modal group bg-black/60 transition-[visibility,opacity] w-screen h-screen fixed left-0 top-0 [&:not(.show)]:duration-[0s,0.2s] [&:not(.show)]:delay-[0.2s,0s] [&:not(.show)]:invisible [&:not(.show)]:opacity-0 [&.show]:visible [&.show]:opacity-100 [&.show]:duration-[0s,0.4s]">
+        <!-- BEGIN: Slide Over Header -->
+        <div data-tw-merge=""
+            class="w-[90%] ml-auto h-screen flex flex-col bg-white relative shadow-md transition-[margin-right] duration-[0.6s] -mr-[100%] group-[.show]:mr-0 dark:bg-darkmode-600 sm:w-[460px]">
+            <a class="absolute top-0 left-0 right-auto mt-4 -ml-10 sm:-ml-12" data-tw-dismiss="modal" href="#">
+                <i data-tw-merge="" data-lucide="x" class="stroke-1.5 w-8 h-8 text-slate-400"></i>
+            </a>
+            <div data-tw-merge=""
+                class="flex items-center px-5 py-3 border-b border-slate-200/60 dark:border-darkmode-400"
+                style="background-color: #1d3885 !important;color: #fff !important;">
+                <h2 class="mr-auto text-base font-medium" id="slide-over-title">
+                   
+                </h2>
+
+
+            </div>
+            <!-- END: Slide Over Header -->
+            <!-- BEGIN: Slide Over Body -->
+            <div data-tw-merge="" class="p-5 overflow-y-auto flex-1">
+
+                <div id="model_data_details"></div>
+            </div>
+            <!-- END: Slide Over Body -->
+            <!-- BEGIN: Slide Over Footer -->
+            {{-- <div class="px-5 py-3 text-right border-t border-slate-200/60 dark:border-darkmode-400">
+            <button data-tw-merge="" data-tw-dismiss="modal" type="button" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed border-secondary text-slate-500 dark:border-darkmode-100/40 dark:text-slate-300 [&:hover:not(:disabled)]:bg-secondary/20 [&:hover:not(:disabled)]:dark:bg-darkmode-100/10 w-20 mr-1">Cancel</button>
+            <button data-tw-merge="" type="button" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary w-20">Send</button>
+        </div> --}}
+        </div>
+        <!-- END: Slide Over Footer -->
+    </div>
+    <!-- END: Slide Over Content -->
 </body>
 
+<!-- Mirrored from midone-html.vercel.app/rubick-side-menu-dashboard-overview-1-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 30 Dec 2024 13:46:53 GMT -->
 
 </html>
-
-

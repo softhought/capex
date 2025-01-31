@@ -69,6 +69,7 @@ $(document).on('keyup change', 'input, select', function () {
         $("#" + id + "_error").text("");
         $("#" + id).css('border', '1px solid #c7ccd0');
         $("#" + id).siblings('.select2-container').find('.select2-selection').css('border', '1px solid #c7ccd0');
+        $("#" + id).siblings('.ts-wrapper').find('.ts-control').css('border', '1px solid #c7ccd0');
     }
 });
 
@@ -274,4 +275,24 @@ function readURL(input, imagePreview) {
         }
         reader.readAsDataURL(input.files[0]);
     }
+}
+
+function changeStatusIcon(status,$statusElement) {
+    if (status === "Y") {
+        $statusElement.removeClass("text-danger")
+            .addClass("text-success");
+        $statusElement.html(`
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-square" class="lucide lucide-check-square stroke-1.5 mr-1 h-4 w-4"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+            Active
+        `);
+    } else {
+        $statusElement.removeClass("text-success")
+            .addClass("text-danger")
+            .text("Inactive");
+        $statusElement.html(`
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-square" class="lucide lucide-check-square stroke-1.5 mr-1 h-4 w-4"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+            Inactive
+        `);
+    }
+
 }

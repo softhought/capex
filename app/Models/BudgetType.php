@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AssetGroup extends Model
+class BudgetType extends Model
 {
     use HasFactory;
-    protected $table = 'asset_group_master';
+    protected $table = 'budget_type_master';
 }

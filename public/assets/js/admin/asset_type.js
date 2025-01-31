@@ -1,5 +1,5 @@
 $(function () {
-    tomReset();
+  
     var base_url = $("#base_url").val();
     loadData(base_url); 
         $(document).on("click", ".status", function (e) {    

@@ -1,4 +1,4 @@
-<div class="intro-y {{ $column }}">
+<div class=" {{ $column }}">
     <label for="input-wizard-1"
         class="inline-block mb-2 group-[.form-inline]:mb-2 group-[.form-inline]:sm:mb-0 group-[.form-inline]:sm:mr-5 group-[.form-inline]:sm:text-right">
         {{ $label }}

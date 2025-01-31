@@ -50,7 +50,7 @@
             class="mobile-menu group top-0 inset-x-0 fixed bg-theme-1/90 z-[60] border-b border-white/[0.08] dark:bg-darkmode-800/90 md:hidden before:content-[''] before:w-full before:h-screen before:z-10 before:fixed before:inset-x-0 before:bg-black/90 before:transition-opacity before:duration-200 before:ease-in-out before:invisible before:opacity-0 [&.mobile-menu--active]:before:visible [&.mobile-menu--active]:before:opacity-100">
             <div class="flex h-[70px] items-center px-3 sm:px-8">
                 <a class="mr-auto flex" href="#">
-                    <img class="w-6" src="{{ asset('assets') }}/dist/images/logo.svg" alt="GEPL Capex">
+                    <img class="w-6" src="{{ asset('assets') }}/dist/images/logo.png" alt="GEPL Capex">
                 </a>
                 <a class="mobile-menu-toggler" href="#">
                     <i data-tw-merge="" data-lucide="bar-chart2"
@@ -180,7 +180,7 @@
             <!-- BEGIN: Side Menu -->
             <nav class="side-nav hidden w-[80px] overflow-x-hidden pb-16 pr-5 md:block xl:w-[230px]">
                 <a class="flex items-center pt-4 pl-5 intro-x" href="#">
-                    <img class="w-6" src="{{ asset('assets') }}/dist/images/logo.svg" alt="GEPL Capex">
+                    <img class="w-6" src="{{ asset('assets') }}/dist/images/logo.png" alt="GEPL Capex">
                     <span class="hidden ml-3 text-lg text-white xl:block"> Capex-Admin </span>
                 </a>
                 <div class="my-6 side-nav__divider"></div>

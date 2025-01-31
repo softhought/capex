@@ -40,9 +40,9 @@ class MasterController extends Controller
 
     public function assetstype()
     {     
-        $result['assetType']=AssetType::Join('asset_group', 'asset_group.id', '=', 'asset_type.asset_group_id')
-        ->Join('company_master', 'company_master.id', '=', 'asset_type.company_id')
-        ->select('asset_type.*','asset_group','company_name')->get();
+        $result['assetType']=AssetType::Join('asset_group_master', 'asset_group_master.id', '=', 'asset_type_master.asset_group_id')
+        ->Join('company_master', 'company_master.id', '=', 'asset_type_master.company_id')
+        ->select('asset_type_master.*','asset_group','company_name')->get();
 
        // pre($result['assetType']->toArray());exit;
         $data['bodyView'] = view('admin/master/asset_type_list', $result);
@@ -51,11 +51,11 @@ class MasterController extends Controller
 
     public function getdataassetstype()
     {     
-        $result['assetType']=AssetType::Join('asset_group', 'asset_group.id', '=', 'asset_type.asset_group_id')
-        ->Join('company_master', 'company_master.id', '=', 'asset_type.company_id')
-        ->select('asset_type.*','asset_group','company_name')->get();
+        $result['assetType']=AssetType::Join('asset_group_master', 'asset_group_master.id', '=', 'asset_type_master.asset_group_id')
+        ->Join('company_master', 'company_master.id', '=', 'asset_type_master.company_id')
+        ->select('asset_type_master.*','asset_group','company_name')->get();
 
-       // pre($result['assetType']->toArray());exit;
+      //  pre($result['assetType']->toArray());exit;
       return $data['bodyView'] = view('admin/master/asset_type_partial_view', $result);
       //  return LayoutController::loadAdmin($data);
     }
@@ -185,8 +185,8 @@ class MasterController extends Controller
 
     public function getbusinessdivision()
     {     
-        $result['BusinessDivisionList'] = BusinessDivision::join('location_master', 'location_master.id', '=', 'business_division.location_id')
-        ->select('business_division.*','location_name')
+        $result['BusinessDivisionList'] = BusinessDivision::join('location_master', 'location_master.id', '=', 'business_division_master.location_id')
+        ->select('business_division_master.*','location_name')
         ->get();
       return $data['bodyView'] = view('admin/master/business_division_partial_view', $result);
     }

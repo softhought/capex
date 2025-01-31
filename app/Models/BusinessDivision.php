@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class BusinessDivision extends Model
 {
     use HasFactory;
-    protected $table = 'business_division';
+    protected $table = 'business_division_master';
 }

@@ -11,7 +11,7 @@ class EmployeeAuth
     public function handle(Request $request, Closure $next)
     {
 
-        if($request->session()->has('pptcEmployee')){
+        if($request->session()->has('capexEmployee')){
 
         }else{
             session()->flash('error','Access Denied');

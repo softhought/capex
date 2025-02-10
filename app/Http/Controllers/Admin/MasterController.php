@@ -273,6 +273,11 @@ class MasterController extends Controller
         $result['approverList'] = Approver::leftjoin('employees', 'employees.emp_no', '=', 'approver_details.emp_code')
         ->select('approver_details.*','employees.emp_no','employees.emp_name')
         ->get();
+         $result['ItpathApproval']=Approver::wherein('approver_for',['IT','BOTH'])->get();
+         $result['nonItpathApproval']=Approver::wherein('approver_for',['NONIT','BOTH'])->get();
+
+       //  pre($result['ItpathApproval']->toArray());exit;
+         
       return $data['bodyView'] = view('admin/master/approver_list_partial_view', $result);
     }
 

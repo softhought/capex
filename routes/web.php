@@ -39,6 +39,9 @@ Route::middleware(['employee_auth'])->group(function () {
 
      Route::post('capexrequestaddeditajax', [RequestcapexController::class, 'capexRequestAddEditAction']);
      Route::post('searchvendorbyname', [RequestcapexController::class, 'vendorSearchByName']);
+     Route::post('requestdetailsmodel', [RequestcapexController::class, 'getRequestDetailsModel']);
+
+     Route::post('approvaldetailsmodel', [RequestcapexController::class, 'getApprovalDetailsModel']);
 
     Route::get('logout', [LoginControlller::class, 'logout'])->name('employee.logout');
 

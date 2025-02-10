@@ -85,9 +85,9 @@
   </div>
 
   <div class="mt-5 grid grid-cols-12 gap-4 gap-y-5">       
-    <x-input-component column="col-span-12 sm:col-span-4" type="text" label="Request Date*" name="request_date"
-    id="request_date" class="" placeholder=""
-    value="{{ getEditData($mode, $editData, 'request_date') }}" readonly="readonly"  />  
+    <x-input-component column="col-span-12 sm:col-span-4" type="text" label="Required By*" name="required_by"
+    id="required_by" class="" placeholder=""
+    value="{{ getEditData($mode, $editData, 'required_by') }}" readonly="readonly"  />  
 
     <x-select-component :data="$assetgroup" arraykey="id" arrayValue="asset_group" column="col-span-12 sm:col-span-4"
       label="Asset Group *" name="asset_group_id" id="asset_group_id" class="" placeholder="Select Asset Group"

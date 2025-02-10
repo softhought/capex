@@ -48,7 +48,6 @@ $(function () {
                         $("#" + key + "_error").text(value);
                         $("#" + key).css('border', '1px solid red');
                         $("#" + key).siblings('.ts-wrapper').find('.ts-control').css('border', '1px solid red');
-
                     });
                 }
                 if (response.msg_status == 2) {
@@ -56,14 +55,11 @@ $(function () {
                 }
                 if (response.msg_status == 1) {
                   
-
-                    if (mode == "Add") {
+                    if(mode == "Add") {
                        $('#capexRequestForm')[0].reset();
-                       $(".error-text").text('');
-                    
-                       
+                       $(".error-text").text('');                                        
                     } else {
-                   //  window.location.href = basepath+'/employee'
+                     //  window.location.href = basepath+'/employee'
                     }
                  //   loadData(base_url); 
                     $("#success_msg").text(response.msg_data);
@@ -178,6 +174,33 @@ $(document).click(function (e) {
         $(".vendor_suggestions").addClass("hidden");
     }
 });
+
+
+$(document).on("click", ".requestDetails", function (e) {    
+    e.preventDefault();
+
+    var tableid = $(this).data("tableid");
+    var urlpath = base_url + "/requestdetailsmodel";
+    var csrfToken = $('meta[name="csrf-token"]').attr("content");
+
+    $.ajax({
+        type: "post",
+        url: urlpath,
+        data: {
+            id: tableid  
+        },
+        headers: {
+            "X-CSRF-TOKEN": csrfToken,
+        },
+        success: function (response) {
+            $("#model_request_data_details").html(response);          
+        },
+    });
+
+
+  
+});
+
 
 });
 

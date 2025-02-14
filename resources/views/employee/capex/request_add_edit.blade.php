@@ -150,7 +150,7 @@
         Asset Quotation *
       </label>
       <div class="relative w-full">
-          <input id="file_input" type="file" name="assetQuotationFile" id="assetQuotationFile" class="hidden" onchange="displayFileName()">
+          <input id="file_input" type="file" name="assetQuotationFile[]" id="assetQuotationFile" class="hidden" onchange="displayFileName()" multiple>
           <label for="file_input" class="flex items-center justify-center px-4 py-2 w-full text-sm font-medium text-white bg-blue-600 rounded-lg cursor-pointer hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800 border-2 border-dashed border-primary-600" id="file_label">
                <span id="file_name" class="block  text-sm text-gray-600 dark:text-gray-300">Choose File</span>
           </label>
@@ -207,7 +207,8 @@
   
 
   
- 
+ <span id="success_msg" class="success_msg"></span>
+ <span id="error_msg" class="error_msg"></span>
   
 
   </div>

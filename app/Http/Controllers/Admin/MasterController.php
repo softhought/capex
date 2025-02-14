@@ -154,14 +154,16 @@ class MasterController extends Controller
     {     
         $result['employeeList'] = Employee::with(['manager' => function ($query) {
             $query->select('emp_no', 'emp_name'); // Select only necessary fields
-        }])->get();
+        }])->join('location_master', 'location_master.id', '=', 'employees.location_id')
+        ->join('business_division_master', 'business_division_master.id', '=', 'employees.business_division_id')
+        ->get();
 
         // foreach ($result['employeeList'] as $employee) {
         //    // echo "Employee: " . $employee->emp_name . "\n";
         //     echo "<br>Manager: " . ($employee->manager ? $employee->manager->emp_name : 'No Manager Found') . "\n";
         // }
         // exit;
-        // pre($result['employeeList']);exit;
+        // pre($result['employeeList']->toArray());exit;
         $data['bodyView'] = view('admin/master/employee_list', $result);
         return LayoutController::loadAdmin($data);
     }

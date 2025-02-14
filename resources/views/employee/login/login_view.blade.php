@@ -241,7 +241,7 @@
                             Web-based system designed to automate and <br>streamline the capital expenditure request process
                         </div>
                     </div>
-                    gf
+                  
                 </div>
                 <!-- END: Login Info -->
                 <!-- BEGIN: Login Form -->
@@ -249,7 +249,7 @@
                 
                 <div class="my-10 flex h-screen py-5 xl:my-0 xl:h-auto xl:py-0">                        
                     <div class="mx-auto my-auto w-full rounded-md bg-white px-5 py-8 shadow-md dark:bg-darkmode-600 sm:w-3/4 sm:px-8 lg:w-2/4 xl:ml-20 xl:w-auto xl:bg-transparent xl:p-0 xl:shadow-none">
-                        
+                      
                         <h2 class="intro-x text-center text-2xl font-bold xl:text-left xl:text-3xl">
                             Employee Sign In
                            
@@ -293,10 +293,13 @@
                         </div> --}}
                     </div> 
                     
-                    
+                 
                 </div>
-                
-
+               
+                <a class="-intro-x flex items-center p-4" href="#">
+                    <img  src="{{ asset('assets') }}/images/app-logo.png" alt="GEPL" style="width: 35%;" >
+                    {{-- <span class="ml-3 text-lg text-white"> Midone </span> --}}
+                </a>
                 <!-- END: Login Form -->
             </div> 
         </div>

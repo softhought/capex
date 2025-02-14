@@ -398,7 +398,7 @@
                     <div data-tw-merge="" data-tw-placement="bottom-end" class="dropdown relative"><button
                             data-tw-toggle="dropdown" aria-expanded="false"
                             class="cursor-pointer image-fit zoom-in intro-x block h-8 w-8 overflow-hidden rounded-full shadow-lg"><img
-                                src="{{ asset('assets') }}/dist/images/fakers/profile-5.jpg" alt="GEPL Capex">
+                                src="{{ asset('assets') }}/dist/images/fakers/profile-12.jpg" alt="GEPL Capex">
                         </button>
                         <div data-transition="" data-selector=".show"
                             data-enter="transition-all ease-linear duration-150"

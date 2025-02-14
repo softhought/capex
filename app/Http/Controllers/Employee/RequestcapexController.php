@@ -7,6 +7,7 @@ use App\Http\Controllers\LayoutController;
 use App\Models\ApprovalPath;
 use App\Models\Approver;
 use App\Models\AssetGroup;
+use App\Models\BudgetMaster;
 use App\Models\BudgetType;
 use App\Models\BusinessDivision;
 use App\Models\CapexproposedVendor;
@@ -49,8 +50,7 @@ class RequestcapexController extends Controller
 
         $capexEmployee = session()->get('capexEmployee');
         // pre($capexEmployee);
-        // $this->SetApprovalPathData(2);exit;
-      
+        // $this->SetApprovalPathData(2);exit;   
        // pre($capexEmployee['empCode']);exit;
         $id=0;
         $data = LayoutController::addEditCommon($id);
@@ -128,11 +128,23 @@ class RequestcapexController extends Controller
             $model->emp_code = $capexEmployee['empCode'];
         }
 
+        // if ($request->hasFile('assetQuotationFile')) {
+        //     $QuotationFile = $request->file('assetQuotationFile');
+        //     $docName = "CR" . time()  . $QuotationFile->getClientOriginalExtension();
+        //     $QuotationFile->storeAs('public/asset_quotation_file', $docName);
+        //     $model->asset_quotation_file = $docName;
+        // }
         if ($request->hasFile('assetQuotationFile')) {
-            $QuotationFile = $request->file('assetQuotationFile');
-            $docName = "AN" . time() . 'IL.' . $QuotationFile->getClientOriginalExtension();
-            $QuotationFile->storeAs('public/asset_quotation_file', $docName);
-            $model->asset_quotation_file = $docName;
+            $quotationFiles = $request->file('assetQuotationFile');
+            $docNames = [];
+        
+            foreach ($quotationFiles as $QuotationFile) {
+                $docName = "CR" . time() . uniqid()  .".". $QuotationFile->getClientOriginalExtension();
+                $QuotationFile->storeAs('public/asset_quotation_file', $docName);
+                $docNames[] = $docName;
+            }
+            // Store filenames as JSON or serialized array if needed
+            $model->asset_quotation_file = json_encode($docNames);
         }
 
         $model->request_date = date('Y-m-d');
@@ -192,6 +204,24 @@ class RequestcapexController extends Controller
         ->select(DB::raw("CONCAT(vendor_name, '-', vendor_code) AS vendor_full"))
         ->pluck('vendor_full'); // Pluck the concatenated result
         return response()->json($vendors);
+    }
+
+    public function checkBudgetExist(Request $request)
+    {
+        $asset_group_id = $request->input('asset_group_id');
+        $asset_type_id = $request->input('asset_type_id');
+        $budget_type_id = $request->input('budget_type_id');
+
+        $exist = BudgetMaster::where('asset_group_id', $asset_group_id)
+        ->where('asset_type_id', $asset_type_id)
+        ->where('budget_type_id', $budget_type_id)
+        ->count();
+    
+        return response()->json(['errors' => [], 'msg_status' => $exist]);
+        // $vendors = Vendor::where('vendor_name', 'LIKE', "%{$query}%")
+        // ->select(DB::raw("CONCAT(vendor_name, '-', vendor_code) AS vendor_full"))
+        // ->pluck('vendor_full'); // Pluck the concatenated result
+        // return response()->json($vendors);
     }
 
     function SetApprovalPathData($capex_request_id)
@@ -313,10 +343,10 @@ class RequestcapexController extends Controller
                                     ->where('capex_approval_path_details.is_open', 'Y')
                                     ->where('capex_approval_path_details.is_approved', 'N')
                                     ->select('capex_request.*','capex_approval_path_details.approver_emp_code','approver_name',
-                                    'employees.emp_name as requester', 'asset_group_master.asset_group', 'asset_type_master.asset_type')
+                                    'employees.emp_name as requester', 'asset_group_master.asset_group', 'asset_type_master.asset_type','capex_approval_path_details.id as approval_path_detail_id')
                                     ->get();
 
-                                   // pre($result['pendingCapexList']->toArray());exit;
+                                  //  pre($result['pendingCapexList']->toArray());exit;
       
          $data['bodyView'] = view('employee/capex/approval_request_list_view', $result);
          return LayoutController::loadEmployee($data);
@@ -327,6 +357,8 @@ class RequestcapexController extends Controller
       public function getApprovalDetailsModel(Request $request)
       { 
           $capex_request_id=$request->post('id');
+          $data['capex_request_id'] =$capex_request_id;
+          $data['approval_path_dtl_id'] =$request->post('approval_path_dtl_id');
           $data['capexRequest'] = capexRequest::where('capex_request.id', $capex_request_id)
                                 ->join('employees','employees.emp_no','=','capex_request.emp_code')
                                 ->leftJoin('location_master','location_master.id','=','employees.location_id')
@@ -348,9 +380,68 @@ class RequestcapexController extends Controller
                                 ->select('capex_approval_path_details.*','approver_name','employees.emp_name')
                                 ->get();
 
+          $data['ApproverPathData']=ApprovalPath::where('id', $data['approval_path_dtl_id'])
+                                ->first();   
+                                
+                           
+
           return view('employee/capex/approval_data_model_partial_view', $data);
          // return LayoutController::loadAdmin($data);
       }
+
+
+          /** Approver Action For Approve or Reject */
+    public function capexApprovalAction(Request $request)
+    {
+        $capex_request_id = $request->post('capex_request_id');
+        $approval_action = $request->post('approval_action');
+        $comment = $request->post('comment');
+        $approval_path_details_id = $request->post('approval_path_details_id');
+
+
+        $validator = Validator::make($request->all(), [
+            'comment' => 'required',
+        ], [
+            'comment.required' => 'comment is required.',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['msg_status' => 0, 'errors' => $validator->errors()]);
+        }
+
+        if ($approval_action == 'R') {
+            /* Reject */
+            $approval_model = ApprovalPath::find($approval_path_details_id);
+            $approval_model->is_approved = $approval_action;
+            $approval_model->comment = $comment;
+            $approval_model->review_date = date('Y-m-d');
+            $approval_model->save();
+
+            $pptc_model = capexRequest::find($capex_request_id);
+            $pptc_model->approval_status = 'R';
+            $pptc_model->approval_path_details_id = $approval_path_details_id;
+            $pptc_model->save();
+        } else {
+            /* Approved */
+            $approval_model = ApprovalPath::find($approval_path_details_id);
+            $approval_model->is_approved = $approval_action;
+            $approval_model->comment = $comment;
+            $approval_model->review_date = date('Y-m-d');
+            $approval_model->save();
+
+            checkPriorityLevelApproval($capex_request_id, $approval_model->priority_level, $approval_model->version);
+            checkApprovalProcessDone($capex_request_id, $approval_model->version);
+
+            /** #PENDING_WORK capex close */
+        }
+
+
+
+
+
+        return response()->json(['errors' => [], 'msg_status' => 1, 'msg_data' => '']);
+    }
+
 
 
 

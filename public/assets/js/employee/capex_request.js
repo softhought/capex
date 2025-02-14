@@ -2,7 +2,7 @@ $(function () {
     var base_url = $("#base_url").val();
     initializeTomSelect();
   
-    initializeDatepicker("#request_date", true);
+    initializeDatepicker("#required_by", true);
     $(document).on("change", "#asset_group_id", function (e) {
         e.preventDefault();
         var asset_group_id = $("#asset_group_id").val();      
@@ -54,15 +54,18 @@ $(function () {
                     $("#error_msg").text(response.msg_data);
                 }
                 if (response.msg_status == 1) {
-                  
-                    if(mode == "Add") {
-                       $('#capexRequestForm')[0].reset();
-                       $(".error-text").text('');                                        
-                    } else {
-                     //  window.location.href = basepath+'/employee'
-                    }
-                 //   loadData(base_url); 
+                                                  
                     $("#success_msg").text(response.msg_data);
+
+                    if(mode == "Add") {
+                        $('#capexRequestForm')[0].reset();
+                        $(".error-text").text('');                                        
+                     } else {
+                      //  window.location.href = base_url+'/employee'
+                     }
+                     setTimeout(function() {
+                        window.location.href = base_url + '/request-history';
+                    }, 500);
                   
                 }
 
@@ -202,13 +205,46 @@ $(document).on("click", ".requestDetails", function (e) {
 });
 
 
+
+$(document).on("change", "#asset_group_id,#asset_type_id,#budget_type_id", function () {
+    let asset_group_id = $("#asset_group_id").val();
+    let asset_type_id = $("#asset_type_id").val();
+    let budget_type_id = $("#budget_type_id").val();
+
+    if(asset_group_id=="" || asset_type_id=="" ||  budget_type_id==""){
+        return false;
+    }
+    $("#savebtn").prop("disabled", true);
+
+        var urlpath = base_url + "/checkbudgetexist";
+        $.ajax({
+            url: urlpath,
+            type: "POST",
+            data: { asset_group_id: asset_group_id,asset_type_id:asset_type_id,budget_type_id:budget_type_id },
+            dataType: "json",
+            success: function (data) {  
+                if(data.msg_status == 0){
+                    $("#error_msg").text("No budget entity found against  asset group,asset type,budget type");
+                }else{
+                    $("#savebtn").prop("disabled", false);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error fetching vendors:", error);
+            }
+        });
+   
+});
+
+
 });
 
 function displayFileName() {
     var fileInput = document.getElementById('file_input');
-    var fileName = fileInput.files.length > 0 ? fileInput.files[0].name : "No file selected";
-    document.getElementById('file_name').textContent = fileName;
+    var fileCount = fileInput.files.length;
+    var fileNameText = fileCount > 1 ? fileCount + " files selected" : (fileCount === 1 ? fileInput.files[0].name : "No file selected");
+    
+    document.getElementById('file_name').textContent = fileNameText;
 }
-
 
 

@@ -24,9 +24,9 @@
                 Sanction No
             </th>
 
-            <th class="font-medium px-5 py-3 dark:border-darkmode-300 whitespace-nowrap border-b-0">
+            {{-- <th class="font-medium px-5 py-3 dark:border-darkmode-300 whitespace-nowrap border-b-0">
                 Asset No
-            </th>
+            </th> --}}
             <th class="font-medium px-5 py-3 dark:border-darkmode-300 whitespace-nowrap border-b-0">
                 Waiting Approver
             </th>
@@ -75,19 +75,21 @@
                 </td>
                 <td data-tw-merge=""
                     class="px-5 py-3 border-b dark:border-darkmode-300 box rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
-
+                    {{ $list->sanction_number }}
                 </td>
-                <td data-tw-merge=""
+                {{-- <td data-tw-merge=""
                     class="px-5 py-3 border-b dark:border-darkmode-300 box rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
 
-                </td>
+                </td> --}}
                 <td data-tw-merge=""
                     class="px-5 py-3 border-b dark:border-darkmode-300 box rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
                     @php
                         //pre($list->approvalPathDetails[0]->approver_name);
+                    if($list->approval_status != 'A'){
                         if (!empty($list->approvalPathDetails) && isset($list->approvalPathDetails[0]->approver_name)) {
                             echo $list->approvalPathDetails[0]->approver_name;
                         }
+                    }
                     @endphp
                 </td>
                 <td data-tw-merge=""
@@ -95,13 +97,13 @@
                     {{-- {{  $list->approval_status }}  --}}
 
                     @if ($list->approval_status == 'P')
-                        In Process
+                            <span style="font-weight:bold;color:orange">    In Process </span>
                     @elseif($list->approval_status == 'A')
-                        Approved
+                    <span style="font-weight:bold;color:green">    Approved </span>
                     @elseif($list->approval_status == 'C')
-                        Cancelled
+                          <span style="font-weight:bold;color:red">    Cancelled </span>
                     @elseif($list->approval_status == 'R')
-                        Rejected
+                            <span style="font-weight:bold;color:red">    Rejected </span>
                     @endif
                 </td>
 

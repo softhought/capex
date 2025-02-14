@@ -76,4 +76,26 @@ label{
   }
 
   .focus\:ring:focus {box-shadow: none;}
+
+  .success_msg{
+    font-size: 18px;
+    font-weight: bold;
+    color: green;
+  }
+
+  .error_msg{
+    font-size: 18px;
+    font-weight: bold;
+    color: red;
+  }
+
+  .bg-successX {
+    --tw-bg-opacity: 1;
+    background-color: rgb(128, 198, 21)!important;
+  }
+  .border-successX {
+    --tw-border-opacity: 1;
+    border-color: rgb(128, 198, 21)!important;
+  }
+  
   

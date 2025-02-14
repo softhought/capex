@@ -42,6 +42,8 @@ Route::middleware(['employee_auth'])->group(function () {
      Route::post('requestdetailsmodel', [RequestcapexController::class, 'getRequestDetailsModel']);
 
      Route::post('approvaldetailsmodel', [RequestcapexController::class, 'getApprovalDetailsModel']);
+     Route::post('capexapprovalactionajax', [RequestcapexController::class, 'capexApprovalAction']);
+     Route::post('checkbudgetexist', [RequestcapexController::class, 'checkBudgetExist']);
 
     Route::get('logout', [LoginControlller::class, 'logout'])->name('employee.logout');
 

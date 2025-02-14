@@ -9,9 +9,9 @@
     <meta name="csrf-token" content="Koo2zWJKliRELq4FawEfkQPg3CJYusp6ppGFZw4O">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description"
-        content="Midone admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
+        content="">
     <meta name="keywords"
-        content="admin template, midone Admin Template, dashboard template, flat admin template, responsive admin template, web app">
+        content="">
     <meta name="author" content="LEFT4CODE">
     <title>Capex</title>
     <!-- BEGIN: CSS Assets-->
@@ -186,6 +186,7 @@
                 <div class="my-6 side-nav__divider"></div>
                 <input type="hidden" name="base_url" id="base_url" value="{{ url('/') }}">
                 <ul>
+                  
                     @php
                         $capexEmployee = session()->get('capexEmployee');
                        // pre($capexEmployee['emp_type']);exit;
@@ -194,7 +195,21 @@
                         $role = $capexEmployee['role'];
                     @endphp
                     {!! getTopNavCat($roleId) !!}
+                    @if(checkApprover()=='CFO')                                        
+                    <li>
+                        <a href="{{ url('budget') }}" class="side-menu {{ (Request::segment(1)=='budget') ? 'side-menu--active' : '' }}">
+                            <div class="side-menu__icon">
+                                <i class="fa-solid fa-diamond"></i>
+                            </div>
+                            <div class="side-menu__title">
+                                Budget Entity
+                            </div>
+                        </a>
+                    </li>
+                    @endif
+                 
                 </ul>
+                
 
             </nav>
             <!-- END: Side Menu -->
@@ -223,7 +238,7 @@
                     <div data-tw-merge="" data-tw-placement="bottom-end" class="dropdown relative"><button
                             data-tw-toggle="dropdown" aria-expanded="false"
                             class="cursor-pointer image-fit zoom-in intro-x block h-8 w-8 overflow-hidden rounded-full shadow-lg"><img
-                                src="{{ asset('assets') }}/dist/images/fakers/profile-5.jpg" alt="GEPL Capex">
+                                src="{{ asset('assets') }}/dist/images/fakers/profile-12.jpg" alt="GEPL Capex">
                         </button>
                         <div data-transition="" data-selector=".show"
                             data-enter="transition-all ease-linear duration-150"
@@ -238,7 +253,9 @@
                                 <div class="p-2 font-medium font-normal">
                                     <div class="font-medium">{{ $name }}</div>
                                     <div class="mt-0.5 text-xs text-white/70 dark:text-slate-500">
-                                        {{ $role }}-{{ $capexEmployee['empCode'] }}
+                                        {{-- {{ $role }} --}}
+                                       Employee ID: {{ $capexEmployee['empCode'] }}<br>
+                                        <span class="text-white">{{ checkApprover() }}<span>
                                     </div>
                                 </div>
                                 <div class="h-px my-2 -mx-2 bg-slate-200/60 dark:bg-darkmode-400 bg-white/[0.08]">

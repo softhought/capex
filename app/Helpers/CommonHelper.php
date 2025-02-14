@@ -1,8 +1,11 @@
 <?php
 
 use App\Models\ApprovalPath;
+use App\Models\Approver;
+use App\Models\CapexRequest;
 use App\Models\Coapprover;
 use App\Models\Pptc;
+use App\Models\SerialMaster;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -378,18 +381,16 @@ function nameShortCode($name)
     }, explode(' ', $name)));
 }
 
-function checkPriorityLevelApproval($pptc_master_id, $priority_level, $version)
+function checkPriorityLevelApproval($capex_request_id, $priority_level, $version)
 {
-    // want get data where pptc_master_id = $pptc_master_id and priority_level = $priority_level and version = $version 
-    $approvedPending = ApprovalPath::where('pptc_master_id', $pptc_master_id)
+
+    $approvedPending = ApprovalPath::where('capex_request_id', $capex_request_id)
         ->where('priority_level', $priority_level)
         ->where('version', $version)
         ->where('is_approved', 'N')
         ->count();
-
-    if ($approvedPending == 0) {
-        // update is_open=Y where pptc_master_id = $pptc_master_id and priority_level = $priority_level+1 and version = $version
-        $updateNext = ApprovalPath::where('pptc_master_id', $pptc_master_id)
+    if ($approvedPending == 0) {     
+        $updateNext = ApprovalPath::where('capex_request_id', $capex_request_id)
             ->where('priority_level', $priority_level + 1)
             ->where('version', $version)
             ->update(['is_open' => 'Y']);
@@ -397,46 +398,48 @@ function checkPriorityLevelApproval($pptc_master_id, $priority_level, $version)
 }
 
 
-function checkApprovalProcessDone($pptc_master_id, $version)
+function checkApprovalProcessDone($capex_request_id, $version)
 {
-    $approvalProcessDone = ApprovalPath::where('pptc_master_id', $pptc_master_id)
+    $approvalProcessDone = ApprovalPath::where('capex_request_id', $capex_request_id)
         ->where('version', $version)
         ->where('is_approved', 'N')
         ->count();
 
     if ($approvalProcessDone == 0) {
         // update pptc_master set is_approved = 'Y' where id = $pptc_master_id
-        $updatePptcMaster = Pptc::where('id', $pptc_master_id)
-            ->update(['is_approved' => 'Y', 'approved_on' => date('Y-m-d')]);
+        $updatePptcMaster = CapexRequest::where('id', $capex_request_id)
+            ->update(['approval_status' => 'A', 'approved_on' => date('Y-m-d'),'sanction_number' => generateSanctionNumber()]);
 
         /** send data for vendor info #PENDING_WORK */
     }
 }
 
 
-function coapproverData($approval_path_details_id)
+ function generateSanctionNumber()
 {
-
-    return Coapprover::where('approval_path_details_id', $approval_path_details_id)
-        ->select('coapprover_details.*', 'employees.emp_no','employees.emp_name', 'employees.email')
-        ->join('employees', 'employees.emp_no', '=', 'coapprover_details.coapprover_emp_code')
-        ->orderBy('id', 'asc')
-        ->get();
+    $serialdata = SerialMaster::where(['module' => 'SANCTION_NUMBER'])->first();
+    $lastnumber = $serialdata->lastnumber;
+    $row_id = $serialdata->id;
+    $autoSerialeNo = $lastnumber + 1;
+    $serialModel = SerialMaster::find($row_id);
+    $serialModel->lastnumber = $autoSerialeNo;
+    $serialModel->save();
+    $paddedNumber = str_pad($autoSerialeNo, 5, '0', STR_PAD_LEFT);
+    $serialNumber = $serialdata->moduleTag . '/' . $paddedNumber;
+    return $serialNumber;
 }
 
- function approvalProcessByVersion($pptc_id,$current_version){
-    return ApprovalPath::where('pptc_master_id', $pptc_id)->where('version', $current_version)
-        ->join('employees', 'employees.emp_no', '=', 'pptc_approval_path_details.approver_emp_code')
-        ->leftjoin('approver_details', 'approver_details.id', '=', 'pptc_approval_path_details.approver_id')
-        ->select(
-            'pptc_approval_path_details.*',
-            'employees.emp_no',
-            'employees.emp_name',
-            'employees.email',
-            'approver_details.approver_name',
-            'approver_details.seq',
-            'approver_details.approver_name'
-        )
-        ->get();
 
+function checkApprover()
+{
+    $aprover="";
+    $session = session('capexEmployee');  
+    $approverData=Approver::where(['emp_code' => $session['empCode']])->first();
+    if ($approverData) {
+        // Data exists
+        $aprover=$approverData->approver_name;
+    }
+    
+   return $aprover;
 }
+

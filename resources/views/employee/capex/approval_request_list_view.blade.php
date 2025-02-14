@@ -1,4 +1,4 @@
-@section('title', 'Requested CAPEX History')
+@section('title', 'Approval Request')
 <table id="example" data-tw-merge="" class="w-full text-left -mt-2 border-separate border-spacing-y-[10px]">
     <thead data-tw-merge="" class="custom-thead">
         <tr data-tw-merge="" class="">
@@ -62,7 +62,7 @@
                     class="requestDetails transition duration-200 border shadow-sm inline-flex items-center justify-center py-1 px-1 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary">
                    View </a> --}}
 
-                   <a class="mr-3 flex items-center approvalDetails text-primary" data-tw-merge data-tw-toggle="modal" data-mode="Edit" data-tableid="{{ $list->id }}" 
+                   <a class="mr-3 flex items-center approvalDetails text-primary" data-tw-merge data-tw-toggle="modal" data-mode="Edit" data-tableid="{{ $list->id }}"  data-approvalpathdtlid="{{ $list->approval_path_detail_id }}" 
                     data-tw-target="#header-footer-modal-preview" href="#"  href="#">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-square" class="lucide lucide-check-square stroke-1.5 mr-1 h-4 w-4"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
                     Approval
@@ -89,12 +89,14 @@
                 </td>
                 <td data-tw-merge=""
                     class="px-5 py-3 border-b dark:border-darkmode-300 box rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
-
+                    {{ $list->sanction_number }}
                 </td>
              
                 <td data-tw-merge=""
                     class="px-5 py-3 border-b dark:border-darkmode-300 box rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
-                    {{ $list->approver_name }}
+                   @if($list->approval_status != 'A')
+                   {{ $list->approver_name }}
+                   @endif 
                 <td data-tw-merge=""
                     class="px-5 py-3 border-b dark:border-darkmode-300 box rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
                     {{-- {{  $list->approval_status }}  --}}
@@ -102,7 +104,7 @@
                     @if ($list->approval_status == 'P')
                         In Process
                     @elseif($list->approval_status == 'A')
-                        Approved
+                    <span style="font-weight:bold;color:green">    Approved </span>
                     @elseif($list->approval_status == 'C')
                         Cancelled
                     @elseif($list->approval_status == 'R')

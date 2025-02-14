@@ -278,13 +278,32 @@
                 </div>
              
             </div>
-            <div class="flex items-center">
+            {{-- <div class="flex items-center">
                 <a href="{{ asset('storage/asset_quotation_file/' . $capexRequest->asset_quotation_file) }}" target="_blank" >
                 <button class="transition duration-200 border shadow-sm inline-flex items-center justify-center rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed text-xs py-1.5 px-2 bg-primary border-primary text-white dark:border-primary mb-2 mr-1 w-30">Attachment &nbsp;
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="file" class="lucide lucide-file stroke-1.5 w-5 h-5 mx-auto block"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
                </button></a>
                 
-            </div>
+            </div> --}}
+            @php
+                $files = json_decode($capexRequest->asset_quotation_file, true);
+            @endphp       
+                    <div class="flex items-center">
+                        @if (!empty($files) && is_array($files))
+                        @foreach ($files as $file)
+                        <a href="{{ asset('storage/asset_quotation_file/' . $file) }}" target="_blank">
+                            <button class="transition duration-200 border shadow-sm inline-flex items-center justify-center rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed text-xs py-1.5 px-1 bg-primary border-primary text-white dark:border-primary mb-2 mr-1 w-30">
+                                 &nbsp;
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-paperclip">
+                                    <path d="M9 17V7a5 5 0 0 1 10 0v10a5 5 0 0 1-10 0V9a3 3 0 0 1 6 0v8"></path>
+                                </svg>
+                            </button>
+                        </a>
+                        @endforeach
+                        @endif
+                    </div>
+               
+
        
          
         </div>
@@ -335,4 +354,4 @@
 </div>
 
 <div role="alert" class="alert relative border rounded-md px-5 py-2 bg-success border-success text-slate-900 dark:border-success mb-2 mt-2 w-60" style="background-color: rgb(130, 200, 23);">
-    <b>Sanction No:</b></div>
+    <b>Sanction No: {{ $capexRequest->sanction_number }}</b></div>

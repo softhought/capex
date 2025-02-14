@@ -18,7 +18,7 @@
     
     </div>
 
-    <div class="intro-y col-span-12 overflow-auto lg:overflow-visible marginTopMinus40" id="assettype_data">
+    <div class="intro-y col-span-12 overflow-auto lg:overflow-scroll marginTopMinus40" id="assettype_data">
         {{-- <table id="example" data-tw-merge="" class="w-full text-left -mt-2 border-separate border-spacing-y-[10px]">
             <thead data-tw-merge="" class="custom-thead">
                 <tr data-tw-merge="" class="">

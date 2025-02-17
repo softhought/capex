@@ -1,0 +1,22 @@
+Capex Requester: GEPL0007
+Approver 1(Supervisor): GEPL2745
+
+Supervisor - Dipankar Banerjee (GEPL2745)
+Comment:-Approved  (Dt:-13-02-2025)
+Approved
+IT Reviewer - Abhijit Chakraborty (GEPL8955)
+Comment:-Approved  (Dt:-13-02-2025)
+Approved
+Budget Owner - Kush Tandon (GEPL0043)
+Comment:-
+Pending
+CEO - Kartick Manna (GEPL4120)
+Comment:-
+-- 
+CFO - Hemant Nicholas Nag (GEPL0033)
+Comment:-
+-- 
+CMD - Janmejay Samal (GEPL0031)
+Comment:-
+-- 
+Comment *
